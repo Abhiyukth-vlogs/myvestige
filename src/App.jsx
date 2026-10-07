@@ -10,7 +10,11 @@ import { Brands } from './components/Brands.jsx';
 import { BusinessOpportunity } from './components/BusinessOpportunity.jsx';
 import { Schedule } from './components/Schedule.jsx';
 import { Downloads } from './components/Downloads.jsx';
+import { VMCSuccessStories } from './components/VMCSuccessStories.jsx';
+import { AwardsRecognitions } from './components/AwardsRecognitions.jsx';
+import { ReachOut } from './components/ReachOut.jsx';
 import { Footer } from './components/Footer.jsx';
+
 import { CartDrawer } from './components/CartDrawer.jsx';
 import { DistributorModal } from './components/DistributorModal.jsx';
 import { QuickViewModal } from './components/QuickViewModal.jsx';
@@ -133,8 +137,18 @@ export const AppContent = () => {
         </div>
       </section>
 
-      {/* 11. Exact 4-Column Footer */}
+      {/* 11. VMC Success Stories */}
+      <VMCSuccessStories />
+
+      {/* 12. Awards & Recognitions */}
+      <AwardsRecognitions />
+
+      {/* 13. Refined Reach Out Section */}
+      <ReachOut />
+
+      {/* 14. Comprehensive High-Contrast Footer */}
       <Footer />
+
 
       {/* 12. Cart Drawer */}
       <CartDrawer

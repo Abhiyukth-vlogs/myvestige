@@ -1141,3 +1141,364 @@ footer {
   background: #ffffff;
 }
 
+/* ==========================================================================
+   11. VMC Success Stories (Vestige Millionaire Club)
+   ========================================================================== */
+.vmc-section {
+  padding: 60px 0;
+  background: #ffffff;
+  border-top: 1px solid var(--border-light);
+}
+
+.vmc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.vmc-card {
+  background: #f8fafc;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.vmc-card:hover {
+  border-color: #f59e0b;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.1);
+}
+
+.vmc-header {
+  height: 160px;
+  background: linear-gradient(135deg, #0a192f, #1e3a8a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vmc-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3.5px solid #f59e0b;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.vmc-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #f59e0b;
+  color: #0f172a;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 12px;
+  letter-spacing: 0.05em;
+}
+
+.vmc-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vmc-name {
+  font-size: 1.25rem;
+  font-family: 'Oswald', sans-serif;
+  color: #0f172a;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.vmc-rank {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1f579c;
+}
+
+.vmc-car {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.vmc-quote {
+  font-size: 0.78rem;
+  color: #475569;
+  font-style: italic;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
+.vmc-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   12. Awards & Recognitions Grid
+   ========================================================================== */
+.awards-section {
+  padding: 60px 0;
+  background: #f1f5f9;
+  border-top: 1px solid var(--border-light);
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.award-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+}
+
+.award-card:hover {
+  border-color: #1f579c;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.award-icon-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.award-icon {
+  font-size: 2rem;
+  background: #eff6ff;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.award-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #1f579c;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.award-title {
+  font-size: 1.1rem;
+  font-family: 'Oswald', sans-serif;
+  color: #0f172a;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.award-authority {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.award-desc {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   13. High-Contrast Comprehensive Footer
+   ========================================================================== */
+.high-contrast-footer {
+  background: #060b18;
+  color: #cbd5e1;
+  padding: 60px 0 24px;
+  border-top: 4px solid #1f579c;
+}
+
+.footer-newsletter-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 992px) {
+  .footer-newsletter-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.newsletter-form-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.newsletter-input {
+  flex: 1;
+  min-width: 240px;
+  background: #060b18;
+  border: 1px solid #334155;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.newsletter-input:focus {
+  border-color: #38bdf8;
+}
+
+.helpline-box {
+  background: #060b18;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 36px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.footer-col-head {
+  font-size: 0.95rem;
+  font-family: 'Oswald', sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #1f579c;
+  display: inline-block;
+}
+
+.footer-col-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.footer-col-list a {
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.footer-col-list a:hover {
+  color: #38bdf8;
+}
+
+.app-badge-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.app-badge-btn:hover {
+  background: #1e293b;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+.payment-row-strip {
+  padding: 24px 0;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8rem;
+}
+
+.payment-badges-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.payment-badge {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.bottom-copyright-strip {
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.76rem;
+  color: #64748b;
+}
+
+
