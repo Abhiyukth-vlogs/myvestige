@@ -580,7 +580,83 @@ function setupVictorAssistant() {
 }
 
 // ============================================================================
-// 11. Application Bootstrap
+// 11. Awards & Recognition Carousel & Scroll To Top
+// ============================================================================
+function setupAwardsCarousel() {
+  const prevBtn = document.getElementById('award-prev-btn');
+  const nextBtn = document.getElementById('award-next-btn');
+  const track = document.getElementById('award-carousel-track');
+  if (!prevBtn || !nextBtn || !track) return;
+
+  const awards = [
+    {
+      title: 'Vestige ET now award',
+      img: 'https://prd-vestige-cms.s3.ap-southeast-1.amazonaws.com/Logo_Section_01_9f3831e0ad.png'
+    },
+    {
+      title: 'Global 100 awards',
+      img: 'https://prd-vestige-cms.s3.ap-southeast-1.amazonaws.com/Logo_Section_03_9492423bd8.png'
+    },
+    {
+      title: "India's most trusted direct selling brand",
+      img: 'https://prd-vestige-cms.s3.ap-southeast-1.amazonaws.com/Logo_Section_04_254e738307.png'
+    },
+    {
+      title: 'National Best Employer Brand 2021',
+      img: 'https://prd-vestige-cms.s3.ap-southeast-1.amazonaws.com/Logo_Section_02_75a724239c.png'
+    }
+  ];
+
+  let currentIdx = 0;
+
+  function renderAwards() {
+    track.innerHTML = '';
+    for (let i = 0; i < 3; i++) {
+      const award = awards[(currentIdx + i) % awards.length];
+      const div = document.createElement('div');
+      div.className = 'award-item';
+      div.innerHTML = `
+        <img src="${award.img}" alt="${award.title}">
+        <h5 class="award-name">${award.title}</h5>
+      `;
+      track.appendChild(div);
+    }
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIdx = (currentIdx === 0) ? awards.length - 1 : currentIdx - 1;
+    renderAwards();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIdx = (currentIdx + 1) % awards.length;
+    renderAwards();
+  });
+}
+
+function setupScrollToTop() {
+  const btn = document.getElementById('scroll-to-top-btn');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+      btn.style.transform = 'translateY(0)';
+    } else {
+      btn.style.opacity = '0';
+      btn.style.pointerEvents = 'none';
+      btn.style.transform = 'translateY(15px)';
+    }
+  });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ============================================================================
+// 12. Application Bootstrap
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   initAntiGravityCanvas();
@@ -593,6 +669,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSearchModal();
   setupGrievanceForm();
   setupVictorAssistant();
+  setupAwardsCarousel();
+  setupScrollToTop();
 
   console.log('global.myvestige.com 1:1 clone initialized successfully with Anti-Gravity UI.');
 });
+
