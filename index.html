@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="copyright" content="Vestige Marketing Private Limited">
+  <meta name="author" content="Vestige">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="format-detection" content="telephone=no">
+
+  <title>Vestige - World Class Health &amp; Wellness Product | Top Leading Direct Selling Company</title>
+  <meta name="description" content="Vestige India’s leading direct selling an ISO 9001-2015 certified company which deals in world class health and wellness products. Ensure your career growth with leading Vestige’s direct selling plan Company.">
+  <meta name="keywords" content="Best direct selling companies, Direct selling company, Direct selling, Marketing plan">
+
+  <!-- Stylesheets -->
+  <script type="module" crossorigin src="./assets/index-DXPJkZn8.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-skJjaSYu.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       0. Anti-Gravity Canvas (Floating Zero-G Particle Physics)
+       ======================================================================== -->
+  <canvas id="antigravity-canvas" class="antigravity-bg-canvas"></canvas>
+
+  <div class="mainContainer">
+    <!-- ========================================================================
+         1. Header (Exact global.myvestige.com Header)
+         ======================================================================== -->
+    <header>
+      <div class="container-fluid">
+        <div class="header-top-row">
+          <!-- Logo -->
+          <div class="mynewhead">
+            <a href="/" class="logo-link" title="Vestige Marketing Pvt. Ltd. - Wish You Wellth">
+              <img 
+                src="./images/logo-1.png" 
+                alt="Vestige - Wish You Wellth" 
+                onerror="this.src='https://www.myvestige.com/images/theme/logo-1.png'"
+              >
+            </a>
+          </div>
+
+          <!-- Top Right Controls -->
+          <div class="navLogin">
+            <!-- Search Trigger -->
+            <img 
+              id="btnsearch" 
+              class="btn-search-icon" 
+              src="https://global.myvestige.com/images/search.png" 
+              alt="Search" 
+              title="Search Products"
+              onerror="this.src='https://vestdata.s3.ap-southeast-1.amazonaws.com/images/search.png'"
+            >
+
+            <!-- Country Selection with Flags -->
+            <div class="languagebox" id="country-box">
+              <span class="switchcountry" id="switchcountry-btn" title="Select Country">
+                <img id="current-flag-img" src="https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/india.jpg" alt="india">
+                <span id="current-country-name" style="color: white; font-size: 0.82rem; font-weight: 600;">India</span>
+                <span style="color: white; font-size: 0.7rem;">▼</span>
+              </span>
+              <ul class="country-dropdown-list" id="country-dropdown">
+                <li class="active" data-country="india">
+                  <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/india.jpg" alt="india"> INDIA
+                </li>
+                <li data-country="uae">
+                  <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/uae.jpg" alt="UAE"> UAE
+                </li>
+                <li data-country="bangladesh">
+                  <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/bangladesh.jpg" alt="bangladesh"> BANGLADESH
+                </li>
+                <li data-country="saudiarabia">
+                  <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/saudiarabia.jpg" alt="saudiarabia"> SAUDI ARABIA
+                </li>
+                <li data-country="ghana">
+                  <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/ghana.jpg" alt="ghana"> GHANA
+                </li>
+                <li data-country="philippines">
+                  <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/philippines.jpg" alt="Philippines"> PHILIPPINES
+                </li>
+                <li data-country="ivory-coast">
+                  <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/ivorycoast.jpg" alt="ivorycoast"> IVORY COAST
+                </li>
+              </ul>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="p9divmenu" id="lang-menu-wrap">
+              <div class="lang-trigger-btn" id="lang-trigger-btn">
+                <span id="languageSelectedText">English</span>
+                <span style="font-size: 0.7rem;">▼</span>
+              </div>
+            </div>
+
+            <!-- Login Button -->
+            <button id="login" class="loginbtn" title="Distributor Login">
+              <span>👤</span> login
+            </button>
+          </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navigation">
+          <div class="navBar">
+            <ul>
+              <li><a id="lnkHome" class="active" href="/" title="Home">home</a></li>
+              <li><a href="javascript:void(0);" title="Login" id="nav-login-link">Login</a></li>
+              
+              <!-- Company Dropdown -->
+              <li>
+                <a id="lnkCompany" href="javascript:void(0);" title="Company">company ▾</a>
+                <ul class="dropdownlist">
+                  <li><a href="#about" title="About Vestige">About Vestige</a></li>
+                  <li><a href="#about" title="Management">Management</a></li>
+                  <li><a href="#leadership-series" title="Business Opportunity">Business Opportunity</a></li>
+                  <li><a href="#car-achievers" title="Success Stories">Success Stories</a></li>
+                </ul>
+              </li>
+
+              <!-- Products Dropdown -->
+              <li>
+                <a id="btnproducts" href="#products-schemes" title="Products">products ▾</a>
+                <ul class="dropdownlist">
+                  <li><a href="#brands-section" title="Health Supplements">Health Supplements</a></li>
+                  <li><a href="#brands-section" title="Ayusante">Ayurveda (Ayusante)</a></li>
+                  <li><a href="#brands-section" title="Personal Care">Personal Care</a></li>
+                  <li><a href="#brands-section" title="Oral Care">Oral Care</a></li>
+                  <li><a href="#brands-section" title="Health Food">Health Food</a></li>
+                  <li><a href="#brands-section" title="Premium Skin Care">Premium Skin Care (Skin Formula 9)</a></li>
+                  <li><a href="#brands-section" title="Color Cosmetics">Color Cosmetics (Mistral of Milan)</a></li>
+                  <li><a href="#brands-section" title="Agri Products">Agri Products (Agri 82)</a></li>
+                </ul>
+              </li>
+
+              <!-- Brands Dropdown -->
+              <li>
+                <a href="#brands-section" title="Brands">Brands ▾</a>
+                <ul class="dropdownlist brandslist">
+                  <li>
+                    <a href="#brands-section" title="Prime"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Prime.png" alt="Prime"></a>
+                    <a href="#brands-section" title="Vestige"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img01.png" alt="Vestige"></a>
+                    <a href="#brands-section" title="Ayusante"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img02.png" alt="Ayusante"></a>
+                    <a href="#brands-section" title="Dewgarden"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Dewgarden.png" alt="Dewgarden"></a>
+                    <a href="#brands-section" title="Hyvest"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img07.png" alt="Hyvest"></a>
+                  </li>
+                  <li>
+                    <a href="#brands-section" title="Assure-Natural"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Assure-Natural.png" alt="Assure-Natural"></a>
+                    <a href="#brands-section" title="Assure"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img08.png" alt="Assure"></a>
+                    <a href="#brands-section" title="Dentassure"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img09.png" alt="Dentassure"></a>
+                    <a href="#brands-section" title="Invigo"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img04.png" alt="Invigo"></a>
+                    <a href="#brands-section" title="Zeta"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img06.png" alt="Zeta"></a>
+                  </li>
+                  <li>
+                    <a href="#brands-section" title="Enerva"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Enerva.png" alt="Enerva"></a>
+                    <a href="#brands-section" title="Lite House"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Lite_House.png" alt="Lite House"></a>
+                    <a href="#brands-section" title="Vescare"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Vescare.png" alt="Vescare"></a>
+                    <a href="#brands-section" title="Agri82"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Agri82.png" alt="Agri82"></a>
+                  </li>
+                  <li>
+                    <a href="#brands-section" title="Mach-drive"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Mach_drive.png" alt="Mach-drive"></a>
+                    <a href="#brands-section" title="Truman"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img012.png" alt="Truman"></a>
+                    <a href="#brands-section" title="Mistral of Milan"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Mistral.png" alt="Mistral"></a>
+                    <a href="#brands-section" title="Skin Formula 9"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Skin_Formula.png" alt="Skin Formula 9"></a>
+                    <a href="#brands-section" title="Vellino"><img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/vellino.png" alt="Vellino"></a>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- News -->
+              <li><a id="lnknews" href="#news" title="News">news</a></li>
+              
+              <!-- Gallery -->
+              <li><a id="lnkEvents" href="#videos-section" title="Gallery">gallery</a></li>
+
+              <!-- Schedule Dropdown -->
+              <li>
+                <a id="lnkschedule" href="javascript:void(0);" title="Schedule">schedule ▾</a>
+                <ul class="dropdownlist">
+                  <li><a href="#schedule-info" title="Online Training Schedule">Online Training Schedule</a></li>
+                  <li><a href="#schedule-info" title="Training Request">Training Request</a></li>
+                  <li><a href="#schedule-info" title="Cnt Event Schedule">Cnt Event Schedule</a></li>
+                  <li><a href="#schedule-info" title="Vestige Initiation Programme (vip)">Vestige Initiation Programme (vip)</a></li>
+                  <li><a href="#schedule-info" title="Vestige Leadership Conclave (vlc)">Vestige Leadership Conclave (vlc)</a></li>
+                  <li><a href="#schedule-info" title="Vestige Leadership Conclave-2 (vlc-2)">Vestige Leadership Conclave-2 (vlc-2)</a></li>
+                  <li><a href="#schedule-info" title="Meet The Millionaire (mtm)">Meet The Millionaire (mtm)</a></li>
+                  <li><a href="#schedule-info" title="Personal Care &amp; Mistral of Milan">Personal Care &amp; Mistral of Milan</a></li>
+                  <li><a href="#schedule-info" title="Beauty &amp; Makeup Workshop">Beauty &amp; Makeup Workshop</a></li>
+                  <li><a href="#schedule-info" title="Vestige Award Function (vaf)">Vestige Award Function (vaf)</a></li>
+                  <li><a href="#schedule-info" title="Dale Carnegie">Dale Carnegie</a></li>
+                  <li><a href="#schedule-info" title="Healthcare">Healthcare</a></li>
+                  <li><a href="#schedule-info" title="Agri Training">Agri Training</a></li>
+                  <li><a href="#schedule-info" title="Anniversary Event">Anniversary Event</a></li>
+                  <li><a href="#schedule-info" title="Special Training">Special Training</a></li>
+                </ul>
+              </li>
+
+              <!-- Branches Dropdown -->
+              <li>
+                <a id="lnkBranch" href="javascript:void(0);" title="Branches">branches ▾</a>
+                <ul class="dropdownlist">
+                  <li><a href="#reach-out-section" title="Vestige Branch">Vestige Branch</a></li>
+                  <li><a href="#reach-out-section" title="DLCP Locator">DLCP Store Locator</a></li>
+                </ul>
+              </li>
+
+              <!-- Downloads Dropdown -->
+              <li>
+                <a id="lnkDownload" href="javascript:void(0);" title="Downloads">downloads ▾</a>
+                <ul class="dropdownlist">
+                  <li><a href="#downloads" onclick="alert('Downloading Product Catalogue PDF...'); return false;" title="Downloads">Downloads</a></li>
+                  <li><a href="#downloads" onclick="alert('Downloading Compliance Documents...'); return false;" title="Compliance Documents">Compliance Documents</a></li>
+                </ul>
+              </li>
+
+              <!-- Career Dropdown -->
+              <li>
+                <a id="lnkcareer" href="javascript:void(0);" title="Career">career ▾</a>
+                <ul class="dropdownlist">
+                  <li><a href="#about" title="Work Culture">Work Culture</a></li>
+                  <li><a href="#about" title="Vestige Values">Vestige Values</a></li>
+                  <li><a href="#about" title="Competitive Compensation">Competitive Compensation</a></li>
+                  <li><a href="#about" title="Fun @Vestige">Fun @Vestige</a></li>
+                  <li><a href="#about" title="Vestige Heart to Heart">Vestige Heart to Heart</a></li>
+                  <li><a href="#about" title="Employee Benefits Preposition">Employee Benefits Preposition</a></li>
+                  <li><a href="#about" title="Current Openings" onclick="alert('Opening Vestige Career Portal...'); return false;">Current Openings</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ========================================================================
+         2. Banner Slider with Exact global.myvestige.com Banners
+         ======================================================================== -->
+    <div class="centerContainer">
+      <div class="bannerSlider" id="banner-slider">
+        <!-- Left Vertical Dots Indicator -->
+        <div class="banner-vertical-dots" id="banner-dots">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="banner-track" id="banner-track">
+          <!-- Banner 1: MOM Nail Web -->
+          <div class="banner-item">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/MOM-All-Seasons-Nail-web.jpg" alt="MOM All Seasons Nail Lacquer">
+          </div>
+          <!-- Banner 2: MOM Eyebrow Definer Pencil -->
+          <div class="banner-item">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/MOM-True-Define-Eyebrow-Definer-Pencil_Available.jpg" alt="MOM True Define Eyebrow Definer Pencil">
+          </div>
+          <!-- Banner 3: Buy More Get More -->
+          <div class="banner-item">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/Special-Buy-More-Get-More-Offer-Web-Banner.jpg" alt="Special Buy More Get More Offer">
+          </div>
+          <!-- Banner 4: Congratulations Vestians -->
+          <div class="banner-item">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/Webbanner_congratulationsVestians.jpg" alt="Congratulations Vestians">
+          </div>
+          <!-- Banner 5: Veg Calcium -->
+          <div class="banner-item">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/veg-calcium.jpg" alt="Veg Calcium">
+          </div>
+          <!-- Banner 6: 22nd Anniversary -->
+          <div class="banner-item">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/Vestige-22-Anniversary-Web-banners_Main-Website.jpg" alt="Vestige 22 Anniversary">
+          </div>
+          <!-- Banner 7: Free Delivery -->
+          <div class="banner-item">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/VestigeFreeDelieveryBanner.jpg" alt="Vestige Free Delivery">
+          </div>
+        </div>
+      </div>
+
+      <!-- 7-Color Scheme Action Button Ribbon -->
+      <div class="newSchemeBtn">
+        <a href="https://www.myvestige.com/" target="_blank" class="scheme-btn orangeColor blink" data-text="Vestige New Website">
+          <span>📱</span> Vestige New Website
+        </a>
+        <a href="#Grievance" class="scheme-btn redColor" data-text="Grievance Redressal">
+          <span>⏰</span> Grievance Redressal
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.vestigeshopping" target="_blank" class="scheme-btn blueColor" data-text="Mobile App">
+          <span>📱</span> Mobile app
+        </a>
+        <a href="#schedule-info" class="scheme-btn blueColor" data-text="Schedule">
+          <span>⏰</span> Schedule
+        </a>
+        <a href="https://www.myvestige.com/" target="_blank" class="scheme-btn blueColor" data-text="online shopping">
+          <span>🛒</span> online shopping
+        </a>
+        <a href="https://vimeo.com/795209725/bd9d0cecbd" target="_blank" class="scheme-btn redColor" data-text="Bank Pan">
+          <span>🏛️</span> Bank Pan
+        </a>
+        <a href="#reach-out-section" class="scheme-btn greenColor" data-text="Courier Partner">
+          <span>🚚</span> Courier Partner
+        </a>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         3. Floating Social Dock & Victor Chatbot Launcher (Right Edge)
+         ======================================================================== -->
+    <div class="floating-social-dock">
+      <div class="social-icons-column">
+        <a href="https://www.facebook.com/Vestige-Marketing-PvtLtd-131892360177567/" target="_blank" class="social-icon-btn fb" title="Facebook">f</a>
+        <a href="https://twitter.com/vestigemkt" target="_blank" class="social-icon-btn tw" title="Twitter">𝕏</a>
+        <a href="https://www.instagram.com/vestige_official" target="_blank" class="social-icon-btn ig" title="Instagram">📸</a>
+        <a href="http://youtube.com/vestigemedia" target="_blank" class="social-icon-btn yt" title="Youtube">▶</a>
+      </div>
+
+      <!-- Victor Chat Assistant Floating Launcher -->
+      <div class="victor-dock-wrap">
+        <div class="victor-speech-bubble" id="victor-bubble-hint">
+          Need Help? Ask VICTOR ✕
+        </div>
+        <div class="victor-avatar-btn" id="ask-victor-trigger-btn" title="Chat with Victor - Vestige Digital Assistant">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsapqs_JCwH0tK5WO4ACNnjcBWN58rEG0-sREHFr3CGw3knHliAw" alt="Victor">
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         4. 4 Feature Cards Grid (Monthly Schemes, What's New, Leadership, Car Achievers)
+         ======================================================================== -->
+    <div class="container-fluid">
+      <div class="productSection" id="products-schemes">
+        <div class="feature-grid-4">
+          <!-- Card 1: Monthly Schemes -->
+          <a href="#monthly-schemes" class="prodSec antigravity-card-3d" style="background-image: url('https://vestdata.s3.ap-southeast-1.amazonaws.com/common/Monthly_Scheme.jpg');">
+            <div class="prodDesc">
+              <h2>monthly schemes</h2>
+              <p>Click here to know the latest monthly schemes and special offers.</p>
+            </div>
+            <span class="goBtn">➔</span>
+          </a>
+
+          <!-- Card 2: What's New -->
+          <a href="#news" class="prodSec antigravity-card-3d" style="background-image: url('https://vestdata.s3.ap-southeast-1.amazonaws.com/common/whats_New.jpg');">
+            <div class="prodDesc">
+              <h2>what's new</h2>
+              <p>Keep yourself updated with all the latest happenings in Vestige.</p>
+            </div>
+            <span class="goBtn">➔</span>
+          </a>
+
+          <!-- Card 3: Leadership Series -->
+          <a href="#leadership-series" id="leadership-series" class="prodSec antigravity-card-3d" style="background-image: url('https://vestdata.s3.ap-southeast-1.amazonaws.com/common/Leadership_Series.jpg');">
+            <div class="prodDesc">
+              <h2>Vestige Leadership Series</h2>
+              <p>To those who know the way, Show the way and Go the way.</p>
+            </div>
+            <span class="goBtn">➔</span>
+          </a>
+
+          <!-- Card 4: Car Achievers -->
+          <a href="#car-achievers" id="car-achievers" class="prodSec antigravity-card-3d" style="background-image: url('https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/Vestige-22-Anniversary-Web-banners_Main-Website.jpg');">
+            <div class="prodDesc">
+              <h2>Car Achievers</h2>
+              <p>Meet the Vestige Dream Achievers who have purchased their dream cars.</p>
+            </div>
+            <span class="goBtn">➔</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ========================================================================
+           5. Our Brands Section (Exact 18 Brand Cards)
+           ======================================================================== -->
+      <div class="brandSection" id="brands-section">
+        <h2 class="section-main-title">our brands</h2>
+        <div class="brandssecWrap">
+          <a href="#brands-section" title="Vellino" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/vellino.png" alt="Vellino">
+          </a>
+          <a href="#brands-section" title="Ayusante" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img02.png" alt="Ayusante">
+          </a>
+          <a href="#brands-section" title="Mistral of milan" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Mistral.png" alt="Mistral of milan">
+          </a>
+          <a href="#brands-section" title="Truman" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img012.png" alt="Truman">
+          </a>
+          <a href="#brands-section" title="Skin formula 9" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Skin_Formula.png" alt="Skin formula 9">
+          </a>
+          <a href="#brands-section" title="Hyvest" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img07.png" alt="Hyvest">
+          </a>
+          <a href="#brands-section" title="Assure-Natural" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Assure-Natural.png" alt="Assure-Natural">
+          </a>
+          <a href="#brands-section" title="AGRI" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Agri82.png" alt="AGRI">
+          </a>
+          <a href="#brands-section" title="Assure" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img08.png" alt="Assure">
+          </a>
+          <a href="#brands-section" title="Dentassure" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img09.png" alt="Dentassure">
+          </a>
+          <a href="#brands-section" title="DewGarden" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Dewgarden.png" alt="DewGarden">
+          </a>
+          <a href="#brands-section" title="Enerva" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Enerva.png" alt="Enerva">
+          </a>
+          <a href="#brands-section" title="Lite House" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Lite_House.png" alt="Lite House">
+          </a>
+          <a href="#brands-section" title="Mach-Drive" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Mach_drive.png" alt="Mach-Drive">
+          </a>
+          <a href="#brands-section" title="Vescare" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Vescare.png" alt="Vescare">
+          </a>
+          <a href="#brands-section" title="Invigo" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img04.png" alt="Invigo">
+          </a>
+          <a href="#brands-section" title="Prime" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/Prime.png" alt="Prime">
+          </a>
+          <a href="#brands-section" title="Zeta" class="brandsimgWrap antigravity-card-3d">
+            <img src="https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img06.png" alt="Zeta">
+          </a>
+        </div>
+      </div>
+
+      <!-- ========================================================================
+           6. About Vestige Section (Exact Words and Structure)
+           ======================================================================== -->
+      <div class="aboutSection" id="about">
+        <h2 class="section-main-title">about vestige</h2>
+        <div class="about-body-wrap">
+          <p>Vestige Marketing Pvt. Ltd., which started its operations in the year 2004, is now becoming a leading direct selling company dealing in world class wellness products. Vestige is constantly growing at a phenomenal rate every year. The growth rate in itself speaks volumes about the quality of the products, the marketing plan and the management that has been able to deliver such a rewarding and sustainable system.</p>
+          <p>Vestige is constantly expanding its product range to introduce innovative products every year, manufactured at state-of-the-art manufacturing facilities, which are GMP and Halal certified. Vestige is an ISO 9001-2015 certified company and believes in world class service levels to all its customers. With over 3000+ online and offline sales outlets pan India, multiple international offices and several distributor centres, Vestige has been building a widespread network of distributors, which is constantly growing every year.</p>
+          <p>Vestige believes in empowering its members with the opportunity to lead their lives on their own terms. With the motto of spreading Wellth, i.e. spreading wealth through wellness, Vestige has continued to enrich the lives of everyone who is a part of the company and those who believe in its products.</p>
+
+          <div class="vision-mission-grid">
+            <div class="vm-card antigravity-card-3d">
+              <h3>vision</h3>
+              <p>To help people live a life of economic independence on their own terms</p>
+            </div>
+            <div class="vm-card antigravity-card-3d">
+              <h3>mission</h3>
+              <p>To grow to a global scale and become the benchmark in direct selling</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================
+           7. Video Section (Exact YouTube Embeds from global.myvestige.com)
+           ======================================================================== -->
+      <div class="videoSection" id="videos-section">
+        <h2 class="section-main-title">Our Videos</h2>
+        <div class="videosec-grid">
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/FaN7kKD8d1A" title="Vestige Video 1" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/FYp0CZ6LUNY" title="Vestige Video 2" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/uy3qEDmG7D4" title="Vestige Video 3" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/tpDRLSig2Ew" title="Vestige Video 4" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0 50px;">
+          <a href="#videos-section" class="btn btn-primary" style="background: #16a34a; padding: 12px 30px; font-size: 1rem; border-radius: 6px;">View More</a>
+        </div>
+
+        <h2 class="section-main-title">Know more about APP features</h2>
+        <div class="videosec-grid">
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/5EoWGSxzsHU" title="App Video 1" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/c6hkVgzm2pI" title="App Video 2" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/nJC2eaxXRSo" title="App Video 3" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/VEz9LnLvICI" title="App Video 4" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/PtAXF8rF8Qo" title="App Video 5" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="videowrapbox antigravity-card-3d">
+            <div class="videosec">
+              <iframe src="https://www.youtube.com/embed/CmAhEdUCb2s" title="App Video 6" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================
+           8. Reach Out Section (Exact 3-Column Layout & Write To Us Form)
+           ======================================================================== -->
+      <div class="reachoutSection" id="reach-out-section">
+        <h2 class="section-main-title">reach out</h2>
+        <div class="reachoutwrap">
+          <!-- Col 1: Corporate Office Details -->
+          <div class="reachDetail antigravity-card-3d">
+            <ul>
+              <li>
+                <h3>Our Corporate Office</h3>
+                <p>Vestige Marketing Pvt. Ltd.<br>A-89, Okhla Industrial Area Phase II<br>New Delhi 110020</p>
+              </li>
+              <li>
+                <h3>Phone:</h3>
+                <p><a href="tel:011-43101234">011-43101234</a></p>
+              </li>
+              <li>
+                <h3>All India Toll Free No. :</h3>
+                <p><a href="tel:18001023424">18001023424</a></p>
+              </li>
+              <li>
+                <h3>Whatsapp your queries on:</h3>
+                <p><a href="https://wa.me/919315955844" target="_blank">+91 9315955844</a></p>
+              </li>
+              <li>
+                <h3>Customer Care Numbers:</h3>
+                <p>Chennai: <a href="tel:044-28252516">044-28252516</a></p>
+                <p>Bhubaneswar: <a href="tel:0674-2573326">0674-2573326</a></p>
+                <p>Kolkata North: <a href="tel:033-40016441">033-40016441</a></p>
+                <p>Kolkata South: <a href="tel:033-40034921">033-40034921</a></p>
+              </li>
+            </ul>
+            <div style="margin-top: 20px;">
+              <a href="#reach-out-section" onclick="alert('Viewing Vestige Corporate Office Location: New Delhi'); return false;">
+                <img 
+                  alt="Vestige Marketing Pvt. Ltd." 
+                  src="https://global.myvestige.com/images/VestigeMap.PNG" 
+                  style="width: 100%; height: auto; border-radius: 8px;"
+                  onerror="this.src='https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=350&q=80'"
+                >
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Write to Us Form -->
+          <div class="reachEnqForm antigravity-card-3d">
+            <a id="Grievance"></a>
+            <h3>Write to us</h3>
+            <p>Please write to us using the contact form below if you would like to know more about the opportunity, share ideas, give feedback, have complaints, or would simply like to request a catalogue</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Feedback/Grievance successfully submitted to Vestige Marketing Pvt. Ltd. Support!'); this.reset();">
+              <span class="formfield">
+                <input type="text" id="txtDistId" class="txtBox" maxlength="8" placeholder="Distributor Id *" required>
+              </span>
+              <span class="formfield">
+                <input type="text" id="txtName" class="txtBox" placeholder="Name *" required>
+              </span>
+              <span class="formfield">
+                <input type="tel" id="txtMobile" class="txtBox" maxlength="10" placeholder="Mobile *" required>
+              </span>
+              <span class="formfield">
+                <input type="email" id="txtEmail" class="txtBox" placeholder="Email *" required>
+              </span>
+              <span class="formfield">
+                <select id="ddlGrievance" class="txtBox" required>
+                  <option value="">Select Grievance*</option>
+                  <option value="1">Company Related</option>
+                  <option value="2">Distributor Related</option>
+                  <option value="3">Order Related</option>
+                  <option value="4">Product Quality-Related</option>
+                  <option value="5">Profile Related</option>
+                  <option value="6">Refund Related</option>
+                  <option value="7">Registration Related</option>
+                  <option value="8">RULES OF CONDUCT Related</option>
+                  <option value="9">Branch/ DLCP/ Mini DLCP Related</option>
+                  <option value="10">Mobile App Related</option>
+                  <option value="11">Product Delivery Related</option>
+                </select>
+              </span>
+              <span class="formfield">
+                <textarea id="txtMessage" class="txtBox placeTxt" maxlength="500" placeholder="Your Message *" required></textarea>
+                <span id="spanMessage" style="font-size: 0.75rem; color: #64748b; display: block; text-align: right;">500 Characters left</span>
+              </span>
+              <span class="formfield" style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" id="txtVerify" class="txtBox" placeholder="Enter Captcha (433985) *" style="max-width: 180px;" required>
+                <span style="font-weight: 800; font-size: 1.1rem; letter-spacing: 0.2em; background: #e2e8f0; padding: 6px 14px; border-radius: 6px;">433985</span>
+              </span>
+              <div class="formBtn">
+                <button type="submit" class="btn-form-submit">Submit</button>
+                <button type="reset" class="btn-form-reset">Reset</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Col 3: Emails & Grievance Mechanism -->
+          <div class="reachMail antigravity-card-3d">
+            <ul>
+              <li>
+                <h3>For any queries, write to</h3>
+                <p><a href="mailto:info@myvestige.com">info@myvestige.com</a></p>
+              </li>
+              <li>
+                <div class="salesInfo">
+                  <h3>For Grievance Redressal, write to Mr. Eshan Suri</h3>
+                  <p><a href="mailto:grievance.officerin@myvestige.com">grievance.officerin@myvestige.com</a></p>
+                </div>
+              </li>
+              <li>
+                <div class="salesInfo">
+                  <p>To know the Mechanism to raise your Grievance Redressal, <a href="#downloads" onclick="alert('Downloading Grievance Redressal Mechanism PDF...'); return false;" style="color: blue; text-decoration: underline;">Click Here</a></p>
+                </div>
+              </li>
+              <li>
+                <div class="salesInfo">
+                  <h3>For Nodal Officer, write to Mr Vivek Jhamb</h3>
+                  <p><a href="mailto:nodalofficer@myvestige.com">nodalofficer@myvestige.com</a></p>
+                </div>
+              </li>
+              <li>
+                <div class="salesInfo">
+                  <h3>For Vestige Magazine queries</h3>
+                  <p><a href="mailto:voice@myvestige.com">voice@myvestige.com</a></p>
+                </div>
+              </li>
+              <li>
+                <h3>Our CSR initiative</h3>
+                <a href="#about" title="Vestige heart to heart">
+                  <img src="https://global.myvestige.com/images/brand/06.png" alt="vestige heart to heart" style="max-height: 48px; margin-top: 6px;" onerror="this.src='https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/img06.png'">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         9. Footer (Exact global.myvestige.com Footer)
+         ======================================================================== -->
+    <footer>
+      <div class="container-fluid footer-inner-content">
+        <!-- ISO Certifications Banner -->
+        <div>
+          <img 
+            id="uclfooter_Image1" 
+            class="iso-cert-img" 
+            src="https://vestdata.s3.ap-southeast-1.amazonaws.com/common/ISO.png" 
+            alt="ISO Certifications - Vestige Marketing Pvt. Ltd."
+          >
+        </div>
+
+        <!-- Footer Navigation Links -->
+        <nav class="footer-nav">
+          <ul>
+            <li><a href="#reach-out-section" title="Contact Us">Contact Us</a></li>
+            <li><a href="#about" title="Privacy &amp; Security Policy">Privacy &amp; Security Policy</a></li>
+            <li><a href="#login" title="Registration Process">Registration Process</a></li>
+            <li><a href="#about" title="Shipping Policy">Shipping Policy</a></li>
+            <li><a href="#about" title="Cancellation/Refund Process">Cancellation/Refund Process</a></li>
+            <li><a href="#about" title="T&amp;C">T&amp;C</a></li>
+            <li><a href="#reach-out-section" title="Branches">Branches</a></li>
+            <li><a href="#reach-out-section" title="Delivery">Delivery</a></li>
+          </ul>
+        </nav>
+
+        <div class="copyright-text">
+          &copy; <span id="current-year">2026</span> Vestige Marketing Private Limited | All rights reserved
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       10. Modals & Popups (Onstart Modal, Login Popup, Forgot Password, Search, Languages, Victor)
+       ======================================================================== -->
+
+  <!-- A. Onstart Popup (10 Shades of Life - MOM All-Seasons Nail Lacquer) -->
+  <div id="onstartmodal" class="modal-overlay-custom active">
+    <div class="modal-box" style="max-width: 680px;">
+      <div class="modal-close-cross" id="close-onstart-modal">✕</div>
+      <a href="#brands-section">
+        <img 
+          src="https://vestdata.s3.ap-southeast-1.amazonaws.com/banners/indiabanners/MOM-All-Seasons-Nail-Lacquerpopup.jpg" 
+          alt="10 Shades of Life - MOM All Seasons Nail Lacquer" 
+          style="width: 100%; height: auto; display: block;"
+        >
+      </a>
+    </div>
+  </div>
+
+  <!-- B. Login Popup Modal -->
+  <div id="loginPopupModal" class="modal-overlay-custom">
+    <div class="modal-box" style="max-width: 440px; padding: 32px; width: 100%;">
+      <div class="modal-close-cross" id="close-login-modal">✕</div>
+      <h3 style="font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 6px; text-transform: uppercase;">LOGIN</h3>
+      <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 20px;">Access your Vestige Distributor Business Center</p>
+
+      <form onsubmit="event.preventDefault(); alert('Logging in with Distributor credentials...'); document.getElementById('loginPopupModal').classList.remove('active');">
+        <div style="margin-bottom: 16px;">
+          <label style="font-size: 0.82rem; font-weight: 700; color: #334155; text-transform: uppercase; display: block; margin-bottom: 6px;">Distributor ID</label>
+          <input type="text" class="txtBox" maxlength="8" placeholder="Enter Your Distributor ID" value="78291044" required>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label style="font-size: 0.82rem; font-weight: 700; color: #334155; text-transform: uppercase; display: block; margin-bottom: 6px;">Password</label>
+          <div style="position: relative;">
+            <input type="password" id="login-pwd-input" class="txtBox" placeholder="Your Password" value="••••••••" required>
+            <span id="toggle-pwd-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 0.9rem;">👁️</span>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <a href="javascript:void(0);" id="open-forgot-pwd" style="font-size: 0.82rem; color: var(--primary-blue); font-weight: 600;">Forgot Password?</a>
+          <button type="submit" class="btn-form-submit" style="padding: 10px 28px;">GO</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- C. Forgot Password Popup -->
+  <div id="forgotpwdPopup" class="modal-overlay-custom">
+    <div class="modal-box" style="max-width: 420px; padding: 28px; width: 100%;">
+      <div class="modal-close-cross" id="close-forgot-modal">✕</div>
+      <h3 style="font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 8px;">Forgot Password ?</h3>
+      <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 20px;">Please Enter Your Distributor ID to receive reset instructions via SMS</p>
+      <form onsubmit="event.preventDefault(); alert('Password reset SMS sent to your registered mobile number!'); document.getElementById('forgotpwdPopup').classList.remove('active');">
+        <input type="text" class="txtBox" maxlength="8" placeholder="Enter Your Distributor ID" required style="margin-bottom: 16px;">
+        <div style="display: flex; gap: 10px;">
+          <button type="submit" class="btn-form-submit" style="flex: 1;">Send</button>
+          <button type="button" class="btn-form-reset" id="cancel-forgot-modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- D. Search Modal Popup -->
+  <div id="searchmodal" class="modal-overlay-custom">
+    <div class="modal-box" style="max-width: 520px; padding: 28px; width: 100%;">
+      <div class="modal-close-cross" id="close-search-modal">✕</div>
+      <h3 style="font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 14px;">Search Products</h3>
+      <div style="display: flex; gap: 8px;">
+        <input type="text" id="popup-search-input" class="txtBox" placeholder="Search for Products Name and Description" style="flex: 1;">
+        <button id="popup-search-btn" class="btn-form-submit">Search</button>
+      </div>
+      <div id="search-popup-results" style="margin-top: 16px; max-height: 200px; overflow-y: auto;"></div>
+    </div>
+  </div>
+
+  <!-- E. Multi-Language Selection Modal -->
+  <div id="multiLanguagePopUp" class="modal-overlay-custom">
+    <div class="modal-box" style="max-width: 500px; padding: 28px; width: 100%; text-align: center;">
+      <div class="modal-close-cross" id="close-lang-modal">✕</div>
+      <h3 style="font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 20px;">Select Language</h3>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;" id="lang-modal-grid">
+        <button class="btn btn-secondary lang-choice-btn" data-lang="English">English</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="हिंदी">हिंदी</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="ਪੰਜਾਬੀ">ਪੰਜਾਬੀ</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="বাংলা">বাংলা</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="ગુજરાતી">ગુજરાતી</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="मराठी">मराठी</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="தமிழ்">தமிழ்</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="తెలుగు">తెలుగు</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="മലയാളം">മലയാളം</button>
+        <button class="btn btn-secondary lang-choice-btn" data-lang="ಕನ್ನಡ">ಕನ್ನಡ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- F. Victor AI Chatbot Dialog (Vestige Official Digital Assistant) -->
+  <div class="victor-chat-dialog" id="victor-dialog" style="z-index: 1002;">
+    <div class="victor-chat-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img 
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsapqs_JCwH0tK5WO4ACNnjcBWN58rEG0-sREHFr3CGw3knHliAw" 
+          alt="Victor" 
+          style="width: 32px; height: 32px; border-radius: 50%;"
+        >
+        <div>
+          <strong style="font-size: 0.95rem; display: block;">Victor - Vestige AI Assistant</strong>
+          <span style="font-size: 0.72rem; color: #34d399;">● Online | 24/7 Digital Support</span>
+        </div>
+      </div>
+      <button id="close-victor-btn" style="color: white; font-size: 1.1rem; cursor: pointer;">✕</button>
+    </div>
+    <div class="victor-chat-body" id="victor-chat-messages">
+      <div style="background: #f1f5f9; padding: 10px 14px; border-radius: 12px; margin-bottom: 10px;">
+        👋 Hello! I am <strong>Victor</strong>, your official Vestige Digital Assistant. How can I assist you with products, schemes, or distributor queries today?
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
+        <button class="btn btn-secondary victor-quick-prompt" data-query="Monthly Schemes" style="padding: 6px 12px; font-size: 0.76rem; text-align: left;">🌟 Explain Latest Monthly Schemes</button>
+        <button class="btn btn-secondary victor-quick-prompt" data-query="Join As Distributor" style="padding: 6px 12px; font-size: 0.76rem; text-align: left;">💼 How do I become a Distributor?</button>
+        <button class="btn btn-secondary victor-quick-prompt" data-query="Courier Partner" style="padding: 6px 12px; font-size: 0.76rem; text-align: left;">📦 Track My Order &amp; Delivery</button>
+        <button class="btn btn-secondary victor-quick-prompt" data-query="Branch Locator" style="padding: 6px 12px; font-size: 0.76rem; text-align: left;">📍 Find Nearest Branch &amp; DLCP</button>
+      </div>
+    </div>
+    <div class="victor-chat-footer">
+      <input type="text" id="victor-input" placeholder="Type your query for Victor..." style="flex: 1; padding: 8px 12px; border: 1px solid var(--border-light); border-radius: 8px; font-size: 0.85rem;">
+      <button id="victor-send-btn" class="btn-form-submit" style="padding: 8px 14px; font-size: 0.85rem;">Send</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" style="position: fixed; bottom: 24px; left: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
+
+  <!-- Application Bootstrap -->
+</body>
+</html>
