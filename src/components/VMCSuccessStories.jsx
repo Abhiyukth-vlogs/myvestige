@@ -1,136 +1,212 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { SUCCESS_STORIES } from '../data/successStories.js';
 
 export const VMCSuccessStories = () => {
-  const stories = [
-    {
-      id: 1,
-      name: 'S. P. Bharill',
-      rank: 'Double Universal Crown Director',
-      badge: 'VMC Hall of Fame',
-      car: 'Luxury Car Achiever',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
-      quote: 'Vestige transformed my understanding of network marketing. Spreading wellth through authentic wellness products empowered me to build an empire of financially independent leaders across India.',
-      pv: '15,000,000+ PV Network'
-    },
-    {
-      id: 2,
-      name: 'Siddharth Singh',
-      rank: 'Double Universal Crown Director',
-      badge: 'Global Top Earner',
-      car: 'Multi-Vehicle Dream Achiever',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
-      quote: 'Starting with simple aspirations, the Vestige marketing plan provided the consistency and leverage to achieve the highest honors in Asian direct selling history. Trust the system and empower your team.',
-      pv: '25,000,000+ PV Network'
-    },
-    {
-      id: 3,
-      name: 'Vivek Kumar Saxena',
-      rank: 'Universal Crown Director',
-      badge: 'Car Club Icon',
-      car: 'Mercedes-Benz Achiever',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80',
-      quote: 'The Vestige system offers true economic freedom. With relentless discipline and team empowerment, our dreams of multi-generational security became a living reality for thousands of families.',
-      pv: '8,500,000+ PV Network'
-    },
-    {
-      id: 4,
-      name: 'Santosh Yadav',
-      rank: 'Crown Director',
-      badge: 'Youth Leadership Pioneer',
-      car: 'Luxury SUV Achiever',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
-      quote: 'From humble regional roots to leading a nationwide distributor network. Vestige proves that anyone with belief and dedication can conquer heights and achieve lifelong prosperity.',
-      pv: '6,200,000+ PV Network'
-    }
-  ];
+  const [stories, setStories] = useState(SUCCESS_STORIES);
+  const [activeStory, setActiveStory] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Attempt live API fetch with fallback to 100% authentic scraped data
+  useEffect(() => {
+    const fetchLiveStories = async () => {
+      try {
+        const response = await fetch('https://apiv2.veston.in/api/shopApi/vestige/api/getdistsuccessstorylist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ CountryId: 1, LevelCode: 'L' })
+        });
+        if (response.ok) {
+          const json = await response.json();
+          if (json && json.data && json.data.length > 0) {
+            // Priority ordering to include KANCHAN DEVI and RAMESH PUNHANI
+            const kanchan = json.data.find(d => d.DirectorName?.includes('KANCHAN'));
+            const ramesh = json.data.find(d => d.DirectorName?.includes('RAMESH'));
+            const others = json.data.filter(d => !d.DirectorName?.includes('KANCHAN') && !d.DirectorName?.includes('RAMESH')).slice(0, 10);
+            const combined = [kanchan, ramesh, ...others].filter(Boolean);
+
+            const formatted = combined.map(s => ({
+              id: s.ID,
+              directorId: s.DirectorID,
+              name: s.DirectorName,
+              photoUrl: `https://vestdata.s3.ap-southeast-1.amazonaws.com/images/successstorydistributorphoto/${s.DirectorPhoto}`,
+              message: s.DirectorMessage,
+              messageExcerpt: s.DirectorMessage2 || (s.DirectorMessage ? s.DirectorMessage.slice(0, 90) + '...' : '')
+            }));
+            setStories(formatted);
+          }
+        }
+      } catch (err) {
+        console.warn('Using bundled authentic success stories:', err.message);
+      }
+    };
+
+    fetchLiveStories();
+  }, []);
+
+  const openStoryModal = (story) => {
+    setActiveStory(story);
+    setIsModalOpen(true);
+  };
+
+  const closeStoryModal = () => {
+    setIsModalOpen(false);
+    setActiveStory(null);
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 4 >= stories.length ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? Math.max(0, stories.length - 4) : prev - 1));
+  };
 
   return (
-    <section className="py-16 bg-white border-t border-slate-200" id="vmc-stories-section">
+    <section className="suces success-stories py-14 bg-slate-50 border-t border-slate-200" id="vmc-stories-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
-            Vestige Millionaire Club (VMC)
-          </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold uppercase tracking-wide text-slate-900 font-['Oswald'] mt-3">
-            Inspiring Journeys to Wealth &amp; Wellness
-          </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto text-sm mt-2">
-            Meet the direct selling pioneers who transformed their lives through the Vestige 10-fold marketing plan, earning financial independence and dream cars.
-          </p>
-          <div className="w-20 h-1 bg-amber-500 mx-auto mt-3 rounded"></div>
+        
+        {/* VMC Official Brand Header */}
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-8 pb-4 border-b border-slate-200">
+          <div className="text-center sm:text-left mb-4 sm:mb-0">
+            <h3 className="mb-2">
+              <img 
+                src="https://www.myvestige.com/VMVCM-unit.png" 
+                alt="Vestige Millionaire Club" 
+                className="vmcm-logo h-12 md:h-14 object-contain inline-block"
+              />
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-xl">
+              Meet the inspiring direct selling pioneers of the Vestige Millionaire Club who turned dedication into lifelong wealth and freedom.
+            </p>
+          </div>
+
+          {/* Carousel Arrows */}
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={prevSlide}
+              className="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-700 shadow-sm transition-all"
+              title="Previous Stories"
+            >
+              &#10094;
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-700 shadow-sm transition-all"
+              title="Next Stories"
+            >
+              &#10095;
+            </button>
+          </div>
         </div>
 
-        {/* Stories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stories.map((leader) => (
+        {/* Stories Grid / Carousel */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stories.slice(currentIndex, currentIndex + 4).map((leader) => (
             <div 
               key={leader.id} 
-              className="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 flex flex-col group"
+              className="text-decoration-none text-inherit group"
             >
-              {/* Leader Avatar Header */}
-              <div className="relative h-48 bg-gradient-to-br from-blue-900 to-slate-900 overflow-hidden flex items-center justify-center">
-                <img 
-                  src={leader.image} 
-                  alt={leader.name} 
-                  className="w-28 h-28 rounded-full object-cover border-4 border-amber-400 shadow-md group-hover:scale-105 transition-transform duration-300"
-                />
-                <span className="absolute top-3 right-3 bg-amber-500 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow">
-                  {leader.badge}
-                </span>
-              </div>
-
-              {/* Leader Content */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 font-['Oswald'] uppercase tracking-wide">
-                    {leader.name}
-                  </h3>
-                  <div className="text-xs font-semibold text-blue-700 mt-0.5">
-                    {leader.rank}
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md mt-2 border border-emerald-200">
-                    <span>🚗</span> {leader.car}
-                  </div>
-                  
-                  <p className="text-xs text-slate-600 italic mt-4 leading-relaxed line-clamp-4">
-                    "{leader.quote}"
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-slate-500">
-                    {leader.pv}
+              <div className="card card-product bg-white rounded-xl border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full">
+                
+                {/* Real Live Photo from Vestige S3 */}
+                <div className="relative overflow-hidden bg-slate-100 aspect-square flex items-center justify-center p-3">
+                  <img 
+                    src={leader.photoUrl} 
+                    alt={leader.name} 
+                    className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 shadow-sm"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://www.myvestige.com/VMVCM-unit.png';
+                    }}
+                  />
+                  <span className="absolute top-4 right-4 bg-amber-500 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded shadow">
+                    ID: {leader.directorId}
                   </span>
-                  <a 
-                    href="#car-achievers" 
-                    className="text-xs font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1 font-['Oswald'] uppercase tracking-wider"
-                  >
-                    View Story <span>➔</span>
-                  </a>
                 </div>
+
+                {/* Card Body */}
+                <div className="card-body text-center p-5 flex flex-col flex-1 justify-between">
+                  <div>
+                    <div className="successinner-name mb-2">
+                      <p className="font-['Oswald'] text-base md:text-lg font-bold text-slate-900 uppercase tracking-wide">
+                        {leader.name}
+                      </p>
+                    </div>
+
+                    <div className="text-xs text-slate-600 line-clamp-3 italic leading-relaxed text-left mb-4">
+                      "{leader.message}"
+                    </div>
+                  </div>
+
+                  <div className="read-more pt-3 border-t border-slate-100">
+                    <button 
+                      onClick={() => openStoryModal(leader)}
+                      className="text-xs font-bold text-blue-700 hover:text-blue-900 uppercase tracking-wider inline-flex items-center gap-1 group-hover:underline cursor-pointer"
+                    >
+                      Read More &rarr;
+                    </button>
+                  </div>
+                </div>
+
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom Callout */}
-        <div className="mt-12 bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <h4 className="text-xl font-bold font-['Oswald'] uppercase tracking-wide">
-              Ready to write your own success story?
-            </h4>
-            <p className="text-blue-100 text-xs sm:text-sm mt-1 max-w-xl">
-              Vestige offers a proven 10-fold income plan with zero joining fees under direct selling guidelines.
-            </p>
-          </div>
-          <a 
-            href="#leadership-series" 
-            className="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg uppercase tracking-wider font-['Oswald'] text-sm shadow transition-colors whitespace-nowrap"
-          >
-            Explore Business Plan
-          </a>
-        </div>
       </div>
+
+      {/* Official Modal for Full Testimonial */}
+      {isModalOpen && activeStory && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
+          onClick={closeStoryModal}
+        >
+          <div 
+            className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative border border-slate-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={closeStoryModal}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition-colors"
+            >
+              &times;
+            </button>
+
+            <div className="flex items-center gap-4 mb-4 pb-4 border-b border-slate-100">
+              <img 
+                src={activeStory.photoUrl} 
+                alt={activeStory.name} 
+                className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shadow"
+              />
+              <div>
+                <h4 className="font-['Oswald'] text-xl font-bold text-slate-900 uppercase tracking-wide">
+                  {activeStory.name}
+                </h4>
+                <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                  Distributor ID: {activeStory.directorId}
+                </span>
+              </div>
+            </div>
+
+            <div className="text-sm text-slate-700 leading-relaxed max-h-72 overflow-y-auto pr-2 space-y-3">
+              <p className="italic">
+                "{activeStory.message}"
+              </p>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-slate-100 flex justify-end">
+              <button 
+                onClick={closeStoryModal}
+                className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs uppercase tracking-wider rounded-lg transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -2,277 +2,321 @@ import React, { useState } from 'react';
 
 export const Footer = () => {
   const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [isCareerOpen, setIsCareerOpen] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    if (!email) return;
-    setSubscribed(true);
-    alert(`Thank you for subscribing to Vestige Updates with ${email}!`);
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    alert(`Subscribed Successfully with ${email}!`);
     setEmail('');
   };
 
   return (
-    <footer className="bg-slate-950 text-slate-300 pt-16 pb-10 border-t-4 border-blue-600 antialiased">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* ====================================================================
-            ROW 1: Top Newsletter & Customer Helpline Strip
-            ==================================================================== */}
-        <div className="bg-slate-900/90 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl mb-12 flex flex-col lg:flex-row items-center justify-between gap-8">
-          {/* Newsletter Box */}
-          <div className="flex-1 max-w-xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-400 block mb-1">
-              Stay Connected
-            </span>
-            <h3 className="text-2xl font-bold text-white font-['Oswald'] uppercase tracking-wide">
-              Get the latest updates
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
-              Subscribe to receive new monthly scheme circulars, training schedules, and special product releases directly in your inbox.
-            </p>
+    <footer className="footer bg-white text-slate-700 border-t border-slate-200" id="footer-section">
+      
+      {/* ====================================================================
+          1. Newsletter Strip (vest-newsletter)
+          ==================================================================== */}
+      <section className="vest-newsletter bg-slate-900 text-white py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="newsletter-inner">
+              <h2 className="text-2xl md:text-3xl font-extrabold uppercase font-['Oswald'] tracking-wide">
+                Get The Latest Updates.
+              </h2>
+              <h5 className="text-sm text-slate-300 mt-1">
+                Signup for offers &amp; exclusive discounts.
+              </h5>
+            </div>
 
-            <form onSubmit={handleSubscribe} className="mt-4 flex flex-col sm:flex-row gap-2">
+            <form onSubmit={handleSubscribe} className="flex w-full md:w-auto max-w-md gap-2">
               <input 
                 type="email" 
-                placeholder="Enter your email address" 
+                className="form-control bg-white text-slate-900 px-4 py-2.5 rounded-lg text-sm flex-1 outline-none focus:ring-2 focus:ring-blue-600"
+                placeholder="Enter your email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
               <button 
-                type="submit" 
-                className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2.5 rounded-lg text-sm font-['Oswald'] uppercase tracking-wider transition-colors shadow-md whitespace-nowrap"
+                className="btn bg-blue-700 hover:bg-blue-800 text-white font-bold px-6 py-2.5 rounded-lg text-sm uppercase tracking-wider font-['Oswald'] transition-colors whitespace-nowrap shadow-md"
+                type="submit"
               >
                 Subscribe
               </button>
             </form>
           </div>
+        </div>
+      </section>
 
-          {/* Quick Helpline Highlight */}
-          <div className="w-full lg:w-auto bg-slate-950/70 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center text-2xl border border-blue-500/30">
-                📞
-              </div>
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
-                  All India Toll-Free
-                </span>
-                <a href="tel:18001023424" className="text-xl sm:text-2xl font-black text-white hover:text-blue-400 transition-colors font-mono">
-                  1800 102 3424
-                </a>
+      {/* ====================================================================
+          2. Main Footer Content Matrix
+          ==================================================================== */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-slate-200">
+          
+          {/* Logo Column */}
+          <div className="md:col-span-12 lg:col-span-3">
+            <div className="inner-logo mb-4">
+              <a href="/">
+                <img 
+                  src="https://www.myvestige.com/images/theme/logo-1.png" 
+                  alt="Vestige - Wish You Wellth" 
+                  className="h-16 w-auto object-contain"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://prd-vestige-cms.s3.ap-southeast-1.amazonaws.com/logo_5fb5f62245.png';
+                  }}
+                />
+              </a>
+            </div>
+            <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
+              Vestige Marketing Pvt. Ltd., an ISO 9001-2015 certified direct selling company dealing in world-class health, wellness, and personal care products. Spreading Wellth since 2004.
+            </p>
+          </div>
+
+          {/* Navigation Matrix */}
+          <div className="md:col-span-12 lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            
+            {/* Col 1: Company */}
+            <div>
+              <h6 className="font-['Oswald'] uppercase font-bold text-slate-900 text-base mb-4 tracking-wide border-b border-blue-600 pb-1 inline-block">
+                Company
+              </h6>
+              <ul className="space-y-2 text-xs">
+                <li><a href="/about-vestige" className="text-slate-600 hover:text-blue-700 transition-colors">About Vestige</a></li>
+                <li className="nav-item nav-with-menu">
+                  <button 
+                    onClick={() => setIsCareerOpen(!isCareerOpen)}
+                    className="text-slate-600 hover:text-blue-700 transition-colors flex items-center justify-between w-full text-left"
+                  >
+                    <span>Career</span>
+                    <span className="text-[10px]">{isCareerOpen ? '▲' : '▼'}</span>
+                  </button>
+                  {isCareerOpen && (
+                    <ul className="pl-3 mt-1.5 space-y-1.5 border-l-2 border-blue-600/40">
+                      <li><a href="/work-culture" className="text-slate-500 hover:text-blue-700">Work Culture</a></li>
+                      <li><a href="/vestige-values" className="text-slate-500 hover:text-blue-700">Vestige Values</a></li>
+                      <li><a href="/competitive-compensation" className="text-slate-500 hover:text-blue-700">Competitive Compensation</a></li>
+                      <li><a href="/fun-vestige" className="text-slate-500 hover:text-blue-700">Fun @Vestige</a></li>
+                      <li><a href="/vestige-heart-to-heart-foundation" className="text-slate-500 hover:text-blue-700">Vestige Heart to Heart</a></li>
+                      <li><a href="/employee-benefits-preposition" className="text-slate-500 hover:text-blue-700">Employee Benefits</a></li>
+                      <li><a href="/current-openings" className="text-slate-500 hover:text-blue-700">Current Openings</a></li>
+                    </ul>
+                  )}
+                </li>
+                <li><a href="/grievanceRedressal" className="text-slate-600 hover:text-blue-700 transition-colors">Grievance Redressal</a></li>
+                <li><a href="/contact" className="text-slate-600 hover:text-blue-700 transition-colors">Contact Us</a></li>
+                <li><a href="/NotificationHistory" className="text-slate-600 hover:text-blue-700 transition-colors">Notification History</a></li>
+                <li><a href="/branches" className="text-slate-600 hover:text-blue-700 transition-colors">Vestige Branches</a></li>
+                <li><a href="https://www.vestigehearttoheart.com/" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-blue-700 transition-colors">Vestige Heart To Heart</a></li>
+                <li className="pt-1"><a href="/news-media/featureVideoGuide" className="text-slate-600 hover:text-blue-700 transition-colors font-medium">Walkthrough Video Feature</a></li>
+              </ul>
+            </div>
+
+            {/* Col 2: Policy */}
+            <div>
+              <h6 className="font-['Oswald'] uppercase font-bold text-slate-900 text-base mb-4 tracking-wide border-b border-blue-600 pb-1 inline-block">
+                Policy
+              </h6>
+              <ul className="space-y-2 text-xs">
+                <li><a href="/refundPolicy" className="text-slate-600 hover:text-blue-700 transition-colors">Cancellation &amp; Refund Process</a></li>
+                <li><a href="/deliveryArea" className="text-slate-600 hover:text-blue-700 transition-colors">Delivery Area</a></li>
+                <li><a href="/disclaimer" className="text-slate-600 hover:text-blue-700 transition-colors">Disclaimer</a></li>
+                <li><a href="/privacyPolicy" className="text-slate-600 hover:text-blue-700 transition-colors">Privacy and Security Policy</a></li>
+                <li><a href="/shippingPolicy" className="text-slate-600 hover:text-blue-700 transition-colors">Shipping Policy</a></li>
+                <li><a href="/terms-and-condition" className="text-slate-600 hover:text-blue-700 transition-colors">T&amp;C</a></li>
+              </ul>
+            </div>
+
+            {/* Col 3: Our Corporate Office */}
+            <div>
+              <h6 className="font-['Oswald'] uppercase font-bold text-slate-900 text-base mb-4 tracking-wide border-b border-blue-600 pb-1 inline-block">
+                Our Corporate Office
+              </h6>
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=Vestige%20Marketing%20Pvt.%20Ltd.%20A-89,%20Okhla%20Industrial%20Area%20Phase%20II%20New%20Delhi%20110020" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block text-xs text-slate-600 hover:text-blue-700 transition-colors leading-relaxed"
+              >
+                <div className="nav-link address">
+                  <strong>Vestige Marketing Pvt. Ltd.</strong><br />
+                  A-89, Okhla Industrial Area Phase II<br />
+                  New Delhi 110020
+                </div>
+              </a>
+              <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500">
+                <span>CIN: U51101DL2004PTC126744</span>
               </div>
             </div>
 
-            <div className="h-8 w-px bg-slate-800 hidden sm:block"></div>
+            {/* Col 4: Customer Care */}
+            <div>
+              <h6 className="font-['Oswald'] uppercase font-bold text-slate-900 text-base mb-4 tracking-wide border-b border-blue-600 pb-1 inline-block">
+                Customer Care
+              </h6>
+              <div className="space-y-3 text-xs">
+                <div>
+                  <span className="text-slate-500 block text-[11px]">Phone:</span>
+                  <a href="tel:011-43101234" className="font-bold text-slate-900 hover:text-blue-700 text-sm">
+                    011- 43101234
+                  </a>
+                </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-2xl border border-emerald-500/30">
-                💬
-              </div>
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
-                  WhatsApp Support
-                </span>
-                <a href="https://wa.me/919315955844" target="_blank" rel="noreferrer" className="text-lg font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
-                  +91 9315955844
-                </a>
+                <div>
+                  <span className="text-slate-500 block text-[11px]">All India Toll Free No.:</span>
+                  <a href="tel:18001023424" className="font-bold text-blue-700 hover:text-blue-800 text-base font-mono">
+                    1800 102 3424
+                  </a>
+                </div>
+
+                <div>
+                  <span className="text-slate-500 block text-[11px]">WhatsApp Queries:</span>
+                  <a href="https://wa.me/919315955844" target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:text-emerald-700">
+                    +91 9315955844
+                  </a>
+                </div>
+
+                {/* Social Media Links */}
+                <div className="top-bar-social-media pt-2">
+                  <span className="text-[11px] font-semibold text-slate-500 block mb-2">Connect With Us:</span>
+                  <div className="flex gap-2">
+                    <a 
+                      href="https://www.instagram.com/vestige_official/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full bg-slate-100 hover:bg-pink-600 hover:text-white text-slate-700 flex items-center justify-center text-xs font-bold transition-all shadow-sm"
+                      title="Instagram"
+                    >
+                      IG
+                    </a>
+                    <a 
+                      href="https://www.facebook.com/VestigeMkt/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 flex items-center justify-center text-xs font-bold transition-all shadow-sm"
+                      title="Facebook"
+                    >
+                      FB
+                    </a>
+                    <a 
+                      href="https://twitter.com/vestigemkt" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-700 flex items-center justify-center text-xs font-bold transition-all shadow-sm"
+                      title="Twitter / X"
+                    >
+                      𝕏
+                    </a>
+                    <a 
+                      href="https://www.youtube.com/vestigemedia" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 flex items-center justify-center text-xs font-bold transition-all shadow-sm"
+                      title="YouTube"
+                    >
+                      YT
+                    </a>
+                  </div>
+                </div>
+
               </div>
             </div>
+
           </div>
         </div>
 
         {/* ====================================================================
-            ROW 2: Main 5-Column Navigation Matrix
+            3. Payment Partners & ISO Certification Strip (1:1 Exact Assets)
             ==================================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-800 text-sm">
-          
-          {/* Column 1: Our Corporate Office */}
-          <div className="space-y-3">
-            <h4 className="text-base font-bold text-white font-['Oswald'] uppercase tracking-wider border-b border-blue-600/60 pb-2 inline-block">
-              Our Corporate Office
-            </h4>
-            <div className="text-xs text-slate-400 leading-relaxed space-y-2 pt-1">
-              <p className="font-semibold text-slate-200 text-sm">
-                Vestige Marketing Pvt. Ltd.
-              </p>
-              <p>
-                A-89, Okhla Industrial Area Phase II<br />
-                New Delhi - 110020, India
-              </p>
-              <p className="text-[11px] text-slate-500 pt-1">
-                CIN: U51101DL2004PTC126744<br />
-                ISO 9001:2015 Certified
-              </p>
-              <div className="pt-2 space-y-1">
-                <div><span className="text-slate-500">Phone:</span> <a href="tel:011-43101234" className="text-slate-300 hover:text-blue-400">011-43101234</a></div>
-                <div><span className="text-slate-500">Toll-Free:</span> <a href="tel:18001023424" className="text-blue-400 font-bold">1800 102 3424</a></div>
-                <div><span className="text-slate-500">Email:</span> <a href="mailto:info@myvestige.com" className="text-slate-300 hover:text-blue-400">info@myvestige.com</a></div>
-              </div>
+        <div className="py-6 border-b border-slate-200">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            
+            {/* Payment Partners Live Asset */}
+            <div className="text-center lg:text-left">
+              <ul className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-0">
+                <li className="text-xs font-bold uppercase tracking-wider text-slate-900">
+                  Payment Partners
+                </li>
+                <li>
+                  <a href="#!">
+                    <img 
+                      src="https://prd-vestige-cms.s3.ap-southeast-1.amazonaws.com/payment_method_9e0aeea82e.png" 
+                      alt="Accepted Payment Methods: Visa, MasterCard, RuPay, UPI, Net Banking, Paytm" 
+                      className="h-8 w-auto object-contain"
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="/sitemap" className="text-xs text-slate-500 hover:text-blue-700 pl-2">
+                    | SiteMap
+                  </a>
+                </li>
+              </ul>
             </div>
+
+            {/* ISO Certification Live Asset */}
+            <div className="text-center lg:text-right">
+              <img 
+                src="https://www.myvestige.com/ISO.png" 
+                alt="ISO Certifications" 
+                className="h-10 md:h-12 w-auto object-contain inline-block"
+              />
+            </div>
+
           </div>
+        </div>
 
-          {/* Column 2: Company & Opportunities */}
-          <div className="space-y-3">
-            <h4 className="text-base font-bold text-white font-['Oswald'] uppercase tracking-wider border-b border-blue-600/60 pb-2 inline-block">
-              Company &amp; Opps
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">About Vestige</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">Management Team</a></li>
-              <li><a href="#leadership-series" className="hover:text-blue-400 transition-colors">Leadership Conclave (VLC)</a></li>
-              <li><a href="#leadership-series" className="hover:text-blue-400 transition-colors">Business Opportunity Plan</a></li>
-              <li><a href="#car-achievers" className="hover:text-blue-400 transition-colors">Car Achievers Club</a></li>
-              <li><a href="#car-achievers" className="hover:text-blue-400 transition-colors">Travel Fund Tour Gallery</a></li>
-              <li><a href="#vmc-stories-section" className="hover:text-blue-400 transition-colors">Vestige Millionaire Club (VMC)</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">Vestige Heart to Heart (CSR)</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">Careers @Vestige</a></li>
-            </ul>
-          </div>
-
-          {/* Column 3: Products & Brands */}
-          <div className="space-y-3">
-            <h4 className="text-base font-bold text-white font-['Oswald'] uppercase tracking-wider border-b border-blue-600/60 pb-2 inline-block">
-              Products &amp; Brands
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Health Supplements</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Ayusante Ayurveda</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Assure &amp; Assure Natural</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Dentassure Oral Care</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Skin Formula 9</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Mistral of Milan (Cosmetics)</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Hyvest Home Care</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Agri 82 Bio-Enhancers</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Mach-Drive Nano-Energizer</a></li>
-              <li><a href="#brands-section" className="hover:text-blue-400 transition-colors">Invigo &amp; Zeta Health Foods</a></li>
-            </ul>
-          </div>
-
-          {/* Column 4: Company Policies & Compliance */}
-          <div className="space-y-3">
-            <h4 className="text-base font-bold text-white font-['Oswald'] uppercase tracking-wider border-b border-blue-600/60 pb-2 inline-block">
-              Company Policies
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">Privacy &amp; Security Policy</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">Terms &amp; Conditions</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">Shipping &amp; Delivery Policy</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">Cancellation / Refund Policy</a></li>
-              <li><a href="#about" className="hover:text-blue-400 transition-colors">Distributor Code of Conduct</a></li>
-              <li><a href="#reach-out-section" className="hover:text-blue-400 transition-colors">Grievance Redressal Mechanism</a></li>
-              <li><a href="#downloads" className="hover:text-blue-400 transition-colors">Direct Selling Guidelines 2021</a></li>
-              <li><a href="mailto:nodalofficer@myvestige.com" className="hover:text-blue-400 transition-colors">Nodal Officer: Mr. Vivek Jhamb</a></li>
-              <li><a href="#reach-out-section" className="hover:text-blue-400 transition-colors">DLCP &amp; Branch Locator</a></li>
-            </ul>
-          </div>
-
-          {/* Column 5: Download App & Social Media */}
-          <div className="space-y-4">
-            <h4 className="text-base font-bold text-white font-['Oswald'] uppercase tracking-wider border-b border-blue-600/60 pb-2 inline-block">
-              Vestige Mobile App
-            </h4>
-            <p className="text-xs text-slate-400">
-              Experience seamless shopping, tracking PV points, and monitoring your distributor network.
-            </p>
-
-            {/* App Store Badges */}
-            <div className="space-y-2.5">
-              <a 
-                href="https://apps.apple.com/in/app/vestige-online-shopping-app/id1438781989" 
-                target="_blank" 
-                rel="noreferrer"
-                className="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3.5 py-2 rounded-xl transition-colors group"
-              >
-                <span className="text-2xl text-white">🍎</span>
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider text-slate-400 block leading-tight">Download on the</span>
-                  <span className="text-xs font-bold text-white group-hover:text-blue-400 transition-colors">App Store</span>
-                </div>
-              </a>
-
+        {/* ====================================================================
+            4. Install App Badges (Exact Live myvestige.com Badge Assets)
+            ==================================================================== */}
+        <div className="py-6 border-b border-slate-200">
+          <ul className="flex flex-wrap items-center justify-center gap-4 text-center">
+            <li className="text-xs font-bold uppercase tracking-wider text-slate-900">
+              Install App
+            </li>
+            <li className="foot-img">
               <a 
                 href="https://play.google.com/store/apps/details?id=com.vestigeshopping" 
                 target="_blank" 
-                rel="noreferrer"
-                className="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 border border-slate-700 px-3.5 py-2 rounded-xl transition-colors group"
+                rel="noopener noreferrer"
+                title="Get Vestige Mobile App on Google Play"
               >
-                <span className="text-2xl text-emerald-400">▶</span>
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider text-slate-400 block leading-tight">Get it on</span>
-                  <span className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors">Google Play</span>
-                </div>
+                <img 
+                  src="https://www.myvestige.com/images/theme/google-play.jpg" 
+                  alt="Get it on Google Play" 
+                  className="h-10 w-auto rounded shadow-sm hover:opacity-95 transition-opacity"
+                />
               </a>
-            </div>
-
-            {/* Social Icons */}
-            <div className="pt-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-2">
-                Follow Vestige
-              </span>
-              <div className="flex gap-2">
-                <a href="https://www.facebook.com/Vestige-Marketing-PvtLtd-131892360177567/" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center text-xs font-bold transition-colors" title="Facebook">f</a>
-                <a href="https://twitter.com/vestigemkt" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-sky-500 text-white flex items-center justify-center text-xs font-bold transition-colors" title="Twitter / X">𝕏</a>
-                <a href="https://www.instagram.com/vestige_official" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-pink-600 text-white flex items-center justify-center text-xs font-bold transition-colors" title="Instagram">📸</a>
-                <a href="http://youtube.com/vestigemedia" target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-red-600 text-white flex items-center justify-center text-xs font-bold transition-colors" title="YouTube">▶</a>
-                <a href="https://www.linkedin.com/company/vestige-marketing-pvt.-ltd." target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-blue-700 text-white flex items-center justify-center text-xs font-bold transition-colors" title="LinkedIn">in</a>
-              </div>
-            </div>
-          </div>
+            </li>
+            <li className="foot-img">
+              <a 
+                href="https://apps.apple.com/in/app/vestige-online-shopping-app/id1448596224" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                title="Download Vestige Mobile App on Apple App Store"
+              >
+                <img 
+                  src="https://www.myvestige.com/images/theme/app-store.jpg" 
+                  alt="Download on the App Store" 
+                  className="h-10 w-auto rounded shadow-sm hover:opacity-95 transition-opacity"
+                />
+              </a>
+            </li>
+          </ul>
         </div>
 
         {/* ====================================================================
-            ROW 3: Payment Partners Section
+            5. Exact Copyright Claim
             ==================================================================== */}
-        <div className="py-6 border-b border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <div className="flex items-center gap-2 text-slate-400">
-            <span className="font-semibold text-slate-300">Accepted Payment Methods:</span>
-            <span>100% Secure Encrypted Transactions</span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded font-bold text-white text-[11px] tracking-wider">
-              VISA
-            </div>
-            <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded font-bold text-red-400 text-[11px] tracking-wider">
-              Mastercard
-            </div>
-            <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded font-bold text-emerald-400 text-[11px] tracking-wider">
-              RuPay
-            </div>
-            <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded font-bold text-sky-400 text-[11px] tracking-wider">
-              UPI / GPay
-            </div>
-            <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded font-bold text-slate-300 text-[11px] tracking-wider">
-              Net Banking
-            </div>
-            <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded font-bold text-blue-300 text-[11px] tracking-wider">
-              Paytm
-            </div>
-          </div>
-        </div>
-
-        {/* ====================================================================
-            ROW 4: Accreditations, ISO & Exact Copyright Claim Text
-            ==================================================================== */}
-        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 text-center md:text-left">
-          <div>
-            <p className="font-medium text-slate-400">
-              &copy; {new Date().getFullYear()} Vestige Marketing Private Limited | All Rights Reserved
-            </p>
-            <p className="text-[11px] text-slate-600 mt-1">
-              "Wish You Wellth" is a registered trademark of Vestige Marketing Pvt. Ltd. Direct Selling Entity registered under Consumer Protection (Direct Selling) Rules, 2021.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-4 text-[11px] text-slate-400">
-            <span className="px-2 py-0.5 bg-slate-900 rounded border border-slate-800">ISO 9001:2015</span>
-            <span className="px-2 py-0.5 bg-slate-900 rounded border border-slate-800">GMP Certified</span>
-            <span className="px-2 py-0.5 bg-slate-900 rounded border border-slate-800">Halal Certified</span>
-            <span className="px-2 py-0.5 bg-slate-900 rounded border border-slate-800">IDSA Member</span>
-          </div>
+        <div className="pt-6 text-center">
+          <span className="text-xs text-slate-500">
+            Copyright &copy; <span id="copyright">{new Date().getFullYear()}</span> Vestige Marketing Private Limited | All rights reserved.
+          </span>
         </div>
 
       </div>
