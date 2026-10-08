@@ -48,6 +48,9 @@ export function showToast(message, type = 'success') {
     setTimeout(() => toast.remove(), 300);
   }, 3200);
 }
+if (typeof window !== 'undefined') {
+  window.showToast = showToast;
+}
 
 // ============================================================================
 // 1. Anti-Gravity Canvas Particle Physics Engine
@@ -260,7 +263,7 @@ function setupOnstartModal() {
 }
 
 // ============================================================================
-// 5. Country Flag Switcher Dropdown
+// 5. Country Flag Switcher Dropdown & Glassmorphism Region Switcher
 // ============================================================================
 function setupCountrySwitcher() {
   const triggerBtn = document.getElementById('switchcountry-btn');
@@ -268,6 +271,49 @@ function setupCountrySwitcher() {
   const currentFlag = document.getElementById('current-flag-img');
   const currentCountryName = document.getElementById('current-country-name');
   const countryBox = document.getElementById('country-box');
+  const btnIndia = document.getElementById('toggle-india-portal');
+  const btnGlobal = document.getElementById('toggle-global-portal');
+
+  // Handle India / Global Unified Toggle
+  if (btnIndia && btnGlobal) {
+    btnIndia.addEventListener('click', () => {
+      btnIndia.style.background = '#059669';
+      btnIndia.style.color = 'white';
+      btnGlobal.style.background = 'transparent';
+      btnGlobal.style.color = '#cbd5e1';
+
+      if (currentFlag) {
+        currentFlag.src = 'https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/india.jpg';
+        currentFlag.alt = 'india';
+      }
+      if (currentCountryName) {
+        currentCountryName.textContent = 'India';
+      }
+      dropdown?.querySelectorAll('li').forEach(li => {
+        li.classList.toggle('active', li.getAttribute('data-country') === 'india');
+      });
+      showToast('Switched to www.myvestige.com (India Prime Portal)', 'success');
+    });
+
+    btnGlobal.addEventListener('click', () => {
+      btnGlobal.style.background = '#1f579c';
+      btnGlobal.style.color = 'white';
+      btnIndia.style.background = 'transparent';
+      btnIndia.style.color = '#cbd5e1';
+
+      if (currentFlag) {
+        currentFlag.src = 'https://vestdata.s3.ap-southeast-1.amazonaws.com/images/flag/uae.jpg';
+        currentFlag.alt = 'uae';
+      }
+      if (currentCountryName) {
+        currentCountryName.textContent = 'Global (UAE)';
+      }
+      dropdown?.querySelectorAll('li').forEach(li => {
+        li.classList.toggle('active', li.getAttribute('data-country') === 'uae');
+      });
+      showToast('Switched to global.myvestige.com (Global Unified Hub)', 'info');
+    });
+  }
 
   if (!triggerBtn || !dropdown || !currentFlag) return;
 
@@ -497,7 +543,7 @@ function setupGrievanceForm() {
       const captchaVal = captchaInput?.value.trim();
 
       if (captchaVal !== '433985') {
-        alert('Invalid Captcha Code! Please enter 433985.');
+        showToast('Invalid Captcha Code! Please enter 433985.', 'warning');
         captchaInput?.focus();
         return;
       }

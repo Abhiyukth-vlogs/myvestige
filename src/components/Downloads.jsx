@@ -1,6 +1,8 @@
 import React from 'react';
+import { useRegion } from '../context/RegionContext.jsx';
 
 export const Downloads = () => {
+  const { showToast } = useRegion();
   return (
     <section
       className="section"
@@ -31,7 +33,7 @@ export const Downloads = () => {
             </p>
             <button
               type="button"
-              onClick={() => alert('Downloading Vestige Official Product Catalogue (PDF)...')}
+              onClick={() => showToast('Downloading Vestige Official Product Catalogue (PDF)...', 'info')}
               className="btn btn-secondary"
               style={{ fontSize: '0.8rem', padding: '6px 14px' }}
             >
@@ -49,7 +51,7 @@ export const Downloads = () => {
             </p>
             <button
               type="button"
-              onClick={() => alert('Downloading Latest Voice Magazine (PDF)...')}
+              onClick={() => showToast('Downloading Latest Voice Magazine (PDF)...', 'info')}
               className="btn btn-secondary"
               style={{ fontSize: '0.8rem', padding: '6px 14px' }}
             >
@@ -67,7 +69,7 @@ export const Downloads = () => {
             </p>
             <button
               type="button"
-              onClick={() => alert('Downloading Distributor Application Form (PDF)...')}
+              onClick={() => showToast('Downloading Distributor Application Form (PDF)...', 'info')}
               className="btn btn-secondary"
               style={{ fontSize: '0.8rem', padding: '6px 14px' }}
             >
@@ -85,7 +87,7 @@ export const Downloads = () => {
             </p>
             <button
               type="button"
-              onClick={() => alert('Downloading Direct Selling Guidelines (PDF)...')}
+              onClick={() => showToast('Downloading Direct Selling Guidelines (PDF)...', 'info')}
               className="btn btn-secondary"
               style={{ fontSize: '0.8rem', padding: '6px 14px' }}
             >

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useRegion } from '../context/RegionContext.jsx';
 
 export const ReachOut = () => {
+  const { showToast } = useRegion();
   const [formData, setFormData] = useState({
     distId: '',
     name: '',
@@ -29,12 +31,12 @@ export const ReachOut = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.captcha !== captchaCode) {
-      alert(`Invalid Captcha Code! Please enter ${captchaCode}.`);
+      showToast(`Invalid Captcha Code! Please enter ${captchaCode}.`, 'warning');
       return;
     }
 
     setSubmitted(true);
-    alert(`Thank you ${formData.name} (Distributor ID: ${formData.distId || 'N/A'})! Your grievance has been registered with Vestige Support. Reference ID: VST-${Date.now().toString().slice(-6)}.`);
+    showToast(`Thank you ${formData.name} (Distributor ID: ${formData.distId || 'N/A'})! Your grievance has been registered with Vestige Support. Reference ID: VST-${Date.now().toString().slice(-6)}.`, 'success');
     setFormData({
       distId: '',
       name: '',
@@ -294,7 +296,7 @@ export const ReachOut = () => {
                 <span className="font-semibold text-slate-900 block">Mechanism to Raise Grievance:</span>
                 <a 
                   href="#downloads" 
-                  onClick={(e) => { e.preventDefault(); alert('Downloading Grievance Redressal Mechanism Document (PDF)...'); }}
+                  onClick={(e) => { e.preventDefault(); showToast('Downloading Grievance Redressal Mechanism Document (PDF)...', 'info'); }}
                   className="text-blue-700 underline text-xs font-semibold block mt-0.5"
                 >
                   📄 Click Here to Download PDF

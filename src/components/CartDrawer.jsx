@@ -2,7 +2,7 @@ import React from 'react';
 import { useRegion } from '../context/RegionContext.jsx';
 
 export const CartDrawer = ({ isOpen, onClose, cart, onUpdateQty }) => {
-  const { formatPrice } = useRegion();
+  const { formatPrice, showToast } = useRegion();
 
   const totalPV = cart.reduce((acc, item) => acc + (item.pv * item.qty), 0);
   const totalBV = cart.reduce((acc, item) => acc + (item.bv * item.qty), 0);
@@ -174,7 +174,7 @@ export const CartDrawer = ({ isOpen, onClose, cart, onUpdateQty }) => {
             type="button"
             className="btn btn-primary"
             style={{ width: '100%', padding: '12px', fontSize: '1rem' }}
-            onClick={() => alert('Proceeding to Secure Checkout with Distributor Point Value Verification...')}
+            onClick={() => showToast('Proceeding to Secure Checkout with Distributor Point Value Verification...', 'info')}
           >
             Proceed to Checkout
           </button>

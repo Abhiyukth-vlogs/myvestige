@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import { useRegion } from '../context/RegionContext.jsx';
 
 export const Footer = () => {
+  const { showToast } = useRegion();
   const [email, setEmail] = useState('');
   const [isCareerOpen, setIsCareerOpen] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      alert('Please enter a valid email address.');
+      showToast('Please enter a valid email address.', 'warning');
       return;
     }
-    alert(`Subscribed Successfully with ${email}!`);
+    showToast(`Subscribed Successfully with ${email}!`, 'success');
     setEmail('');
   };
 

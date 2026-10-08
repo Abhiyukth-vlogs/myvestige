@@ -18,6 +18,9 @@ export const QuickViewModal = ({ product, onClose, onAddToCart }) => {
               src={product.image}
               alt={product.title}
               style={{ width: '100%', height: '320px', objectFit: 'cover', borderRadius: '12px' }}
+              onError={(e) => {
+                e.currentTarget.src = '/assets/featured-product.jpeg';
+              }}
             />
           </div>
           <div>

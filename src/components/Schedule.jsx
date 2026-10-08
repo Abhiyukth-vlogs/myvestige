@@ -3,7 +3,7 @@ import { events } from '../data/events.js';
 import { useRegion, REGIONS } from '../context/RegionContext.jsx';
 
 export const Schedule = () => {
-  const { region, selectedCountry } = useRegion();
+  const { region, selectedCountry, showToast } = useRegion();
 
   return (
     <section className="section" id="schedule">
@@ -54,7 +54,7 @@ export const Schedule = () => {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => alert(`RSVP registered for ${ev.title} in ${region === REGIONS.INDIA ? 'India' : selectedCountry.name}!`)}
+                  onClick={() => showToast(`RSVP registered for ${ev.title} in ${region === REGIONS.INDIA ? 'India' : selectedCountry.name}!`, 'success')}
                   style={{ fontSize: '0.82rem', padding: '6px 14px' }}
                 >
                   Register Seat

@@ -46,6 +46,21 @@ export const RegionProvider = ({ children }) => {
     return `${selectedCountry.symbol}${converted.toLocaleString()}`;
   };
 
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const showToast = (msg, type = 'success') => {
+    setToastMessage({ text: msg, type });
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3200);
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.showToast = (msg, type) => showToast(msg, type);
+    }
+  }, []);
+
   return (
     <RegionContext.Provider
       value={{
@@ -56,7 +71,9 @@ export const RegionProvider = ({ children }) => {
         formatPrice,
         availableCountries: region === REGIONS.INDIA ? COUNTRIES.india : COUNTRIES.global,
         isIndia: region === REGIONS.INDIA,
-        isGlobal: region === REGIONS.GLOBAL
+        isGlobal: region === REGIONS.GLOBAL,
+        showToast,
+        toastMessage
       }}
     >
       {children}

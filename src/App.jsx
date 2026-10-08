@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RegionProvider } from './context/RegionContext.jsx';
+import { RegionProvider, useRegion } from './context/RegionContext.jsx';
 import { AntiGravityCanvas } from './components/AntiGravityCanvas.jsx';
 import { Header } from './components/Header.jsx';
 import { Hero } from './components/Hero.jsx';
@@ -22,6 +22,7 @@ import { AskVictor } from './components/AskVictor.jsx';
 import { products } from './data/products.js';
 
 export const AppContent = () => {
+  const { showToast, toastMessage } = useRegion();
   const [cart, setCart] = useState([
     { ...products[0], qty: 2 }, // Vestige Flax Oil
     { ...products[1], qty: 1 }  // Vestige Spirulina
@@ -29,14 +30,6 @@ export const AppContent = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isDistributorOpen, setIsDistributorOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
-  const [toastMessage, setToastMessage] = useState(null);
-
-  const showToast = (msg) => {
-    setToastMessage(msg);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 2800);
-  };
 
   const handleAddToCart = (productId) => {
     const p = products.find(prod => prod.id === productId);
@@ -48,7 +41,7 @@ export const AppContent = () => {
       }
       return [...prev, { ...p, qty: 1 }];
     });
-    showToast(`Added "${p.title}" to Cart (+${p.pv} PV)`);
+    showToast(`Added "${p.title}" to Cart (+${p.pv} PV)`, 'success');
   };
 
   const handleUpdateQty = (productId, newQty) => {
@@ -213,20 +206,40 @@ export const AppContent = () => {
             padding: '12px 20px',
             background: '#0a192f',
             color: 'white',
-            borderLeft: '4px solid #10b981',
+            borderLeft: `4px solid ${
+              toastMessage.type === 'warning'
+                ? '#f59e0b'
+                : toastMessage.type === 'info'
+                ? '#38bdf8'
+                : '#10b981'
+            }`,
             borderRadius: '8px',
             boxShadow: '0 10px 25px rgba(0,0,0,0.25)',
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
             fontSize: '0.88rem',
-            fontWeight: 500
+            fontWeight: 500,
+            animation: 'fadeInDown 0.25s ease'
           }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={
+              toastMessage.type === 'warning'
+                ? '#f59e0b'
+                : toastMessage.type === 'info'
+                ? '#38bdf8'
+                : '#10b981'
+            }
+            strokeWidth="2.5"
+          >
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          <span>{toastMessage}</span>
+          <span>{typeof toastMessage === 'string' ? toastMessage : toastMessage.text}</span>
         </div>
       )}
     </div>

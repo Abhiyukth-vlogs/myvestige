@@ -1,6 +1,8 @@
 import React from 'react';
+import { useRegion } from '../context/RegionContext.jsx';
 
 export const DistributorModal = ({ isOpen, onClose }) => {
+  const { showToast } = useRegion();
   if (!isOpen) return null;
 
   return (
@@ -86,7 +88,7 @@ export const DistributorModal = ({ isOpen, onClose }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            alert('Logged into Vestige Distributor Business Center!');
+            showToast('Logged into Vestige Distributor Business Center!', 'success');
             onClose();
           }}
         >
