@@ -20,13 +20,12 @@ export const Categories = () => {
                 <div
                   className="cat-icon-wrap antigravity-float"
                   style={{
-                    background: 'linear-gradient(135deg, #0a192f, #059669)',
-                    boxShadow: '0 8px 20px rgba(5, 150, 105, 0.3)'
+                    background: 'transparent',
+                    boxShadow: 'none',
+                    padding: 0
                   }}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
+                  <img src={cat.icon} alt={cat.name} style={{ width: '48px', height: '48px', objectFit: 'contain' }} />
                 </div>
                 <h3 className="cat-name">{cat.name}</h3>
                 <p className="cat-tagline">{cat.tagline}</p>

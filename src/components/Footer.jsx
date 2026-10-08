@@ -63,12 +63,11 @@ export const Footer = () => {
             <div className="inner-logo mb-4">
               <a href="/">
                 <img 
-                  src="https://www.myvestige.com/images/theme/logo-1.png" 
+                  src="/images/logo-1.png" 
                   alt="Vestige - Wish You Wellth" 
                   className="h-16 w-auto object-contain"
                   onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://prd-vestige-cms.s3.ap-southeast-1.amazonaws.com/logo_5fb5f62245.png';
+                    e.currentTarget.src = '/assets/logo.png';
                   }}
                 />
               </a>
@@ -236,7 +235,7 @@ export const Footer = () => {
         <div className="py-6 border-b border-slate-200">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             
-            {/* Payment Partners Live Asset */}
+            {/* Payment Partners Local Asset */}
             <div className="text-center lg:text-left">
               <ul className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-0">
                 <li className="text-xs font-bold uppercase tracking-wider text-slate-900">
@@ -245,9 +244,12 @@ export const Footer = () => {
                 <li>
                   <a href="#!">
                     <img 
-                      src="https://prd-vestige-cms.s3.ap-southeast-1.amazonaws.com/payment_method_9e0aeea82e.png" 
+                      src="/assets/payment-partners.png" 
                       alt="Accepted Payment Methods: Visa, MasterCard, RuPay, UPI, Net Banking, Paytm" 
                       className="h-8 w-auto object-contain"
+                      onError={(e) => {
+                        e.currentTarget.src = '/assets/asset 4.png';
+                      }}
                     />
                   </a>
                 </li>
@@ -259,12 +261,15 @@ export const Footer = () => {
               </ul>
             </div>
 
-            {/* ISO Certification Live Asset */}
+            {/* ISO Certification Local Asset */}
             <div className="text-center lg:text-right">
               <img 
-                src="https://www.myvestige.com/ISO.png" 
+                src="/assets/iso-certified.png" 
                 alt="ISO Certifications" 
                 className="h-10 md:h-12 w-auto object-contain inline-block"
+                onError={(e) => {
+                  e.currentTarget.src = '/assets/asset 27.png';
+                }}
               />
             </div>
 
@@ -272,7 +277,7 @@ export const Footer = () => {
         </div>
 
         {/* ====================================================================
-            4. Install App Badges (Exact Live myvestige.com Badge Assets)
+            4. Install App Badges (Exact Local Asset Badges)
             ==================================================================== */}
         <div className="py-6 border-b border-slate-200">
           <ul className="flex flex-wrap items-center justify-center gap-4 text-center">
@@ -287,9 +292,12 @@ export const Footer = () => {
                 title="Get Vestige Mobile App on Google Play"
               >
                 <img 
-                  src="https://www.myvestige.com/images/theme/google-play.jpg" 
+                  src="/assets/google-play.jpeg" 
                   alt="Get it on Google Play" 
                   className="h-10 w-auto rounded shadow-sm hover:opacity-95 transition-opacity"
+                  onError={(e) => {
+                    e.currentTarget.src = '/assets/asset 5.jpeg';
+                  }}
                 />
               </a>
             </li>
@@ -301,9 +309,12 @@ export const Footer = () => {
                 title="Download Vestige Mobile App on Apple App Store"
               >
                 <img 
-                  src="https://www.myvestige.com/images/theme/app-store.jpg" 
+                  src="/assets/app-store.jpeg" 
                   alt="Download on the App Store" 
                   className="h-10 w-auto rounded shadow-sm hover:opacity-95 transition-opacity"
+                  onError={(e) => {
+                    e.currentTarget.src = '/assets/asset 6.jpeg';
+                  }}
                 />
               </a>
             </li>

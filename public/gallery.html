@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyVestige Asset Gallery — Live Visual Inventory</title>
+    <meta name="description" content="Complete visual inventory of all extracted assets from myvestige.com — images, SVGs, icons, and brand color palette.">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-body: #0b0f19;
+            --bg-surface: #111827;
+            --bg-card: rgba(17, 24, 39, 0.85);
+            --bg-card-hover: rgba(30, 41, 59, 0.95);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(0, 91, 170, 0.6);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --vestige-blue: #005BAA;
+            --vestige-blue-light: #005BB2;
+            --vestige-green: #198754;
+            --vestige-lime: #0AAD0A;
+            --vestige-gold: #DDB96B;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
+            --shadow-hover: 0 16px 36px -6px rgba(0, 91, 170, 0.3), 0 0 0 1px var(--border-hover);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* ── Header ── */
+        header {
+            background: linear-gradient(180deg, rgba(0, 91, 170, 0.15) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 48px 24px 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 91, 170, 0.2);
+            border: 1px solid rgba(0, 91, 170, 0.4);
+            color: #60a5fa;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 30%, #93c5fd 70%, #86efac 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto 24px;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .stat-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .stat-chip strong {
+            color: var(--vestige-blue-light);
+            font-size: 1.05rem;
+            font-family: var(--font-mono);
+        }
+
+        /* ── Controls Toolbar (Sticky) ── */
+        .toolbar-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+        }
+
+        .toolbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            background: var(--vestige-blue);
+            color: #ffffff;
+            border-color: var(--vestige-blue);
+            box-shadow: 0 0 16px rgba(0, 91, 170, 0.4);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 380px;
+            min-width: 220px;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            padding: 10px 14px 10px 38px;
+            border-radius: 8px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--vestige-blue);
+            box-shadow: 0 0 0 3px rgba(0, 91, 170, 0.25);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            pointer-events: none;
+            display: flex;
+        }
+
+        /* ── Main Layout ── */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        /* ── Sections ── */
+        .section-block {
+            margin-bottom: 56px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .section-tag {
+            background: rgba(0, 91, 170, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(0, 91, 170, 0.3);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 9999px;
+        }
+
+        .section-folder {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        /* ── Grids ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-grid.svg-grid {
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 16px;
+        }
+
+        /* ── Gallery Card ── */
+        .gallery-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-hover);
+            background: var(--bg-card-hover);
+        }
+
+        .gallery-card.filtered-out {
+            display: none !important;
+        }
+
+        /* Preview Area */
+        .preview-area {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background:
+                linear-gradient(45deg, #161e2e 25%, transparent 25%),
+                linear-gradient(-45deg, #161e2e 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #161e2e 75%),
+                linear-gradient(-45deg, transparent 75%, #161e2e 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+            background-color: #0f1523;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow: hidden;
+        }
+
+        .preview-area img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+        }
+
+        .gallery-card:hover .preview-area img {
+            transform: scale(1.08);
+        }
+
+        /* Badges */
+        .badge-ext {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(8px);
+            z-index: 2;
+        }
+
+        .badge-png  { background: rgba(59, 130, 246, 0.25); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.4); }
+        .badge-jpeg { background: rgba(245, 158, 11, 0.25); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .badge-svg  { background: rgba(16, 185, 129, 0.25); color: #86efac; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .badge-gif  { background: rgba(168, 85, 247, 0.25); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.4); }
+
+        .badge-size {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 0.65rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3px 8px;
+            border-radius: 6px;
+            backdrop-filter: blur(8px);
+            z-index: 2;
+        }
+
+        /* Card Meta Details */
+        .card-details {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .file-path {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            word-break: break-all;
+            line-height: 1.4;
+            transition: color var(--transition);
+        }
+
+        .gallery-card:hover .file-path {
+            color: var(--text-main);
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 7px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .copy-btn:hover {
+            background: var(--vestige-blue);
+            color: #ffffff;
+            border-color: var(--vestige-blue);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* ── Color Palette Swatches ── */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .color-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--border-hover);
+        }
+
+        .swatch-fill {
+            height: 90px;
+            width: 100%;
+            position: relative;
+        }
+
+        .swatch-meta {
+            padding: 10px 12px;
+        }
+
+        .swatch-hex {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .swatch-name {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* ── Toast Alert ── */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: #005BAA;
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            box-shadow: 0 10px 30px rgba(0, 91, 170, 0.5);
+            z-index: 999;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast.visible {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ── No Match State ── */
+        .no-matches {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .no-matches.active {
+            display: block;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            header { padding: 36px 16px 24px; }
+            .toolbar-container { flex-direction: column; align-items: stretch; }
+            .search-box { max-width: 100%; }
+            .filter-tabs { overflow-x: auto; padding-bottom: 4px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+            .gallery-grid.svg-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="header-content">
+        <div class="brand-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+            MyVestige Extracted Assets
+        </div>
+        <h1>Visual Asset Gallery</h1>
+        <p>Verified, live visual inventory of every single image, icon, banner, and brand color extracted from myvestige.com.</p>
+        
+        <div class="stats-bar">
+            <div class="stat-chip"><strong>12</strong> Images</div>
+            <div class="stat-chip"><strong>38</strong> Assets</div>
+            <div class="stat-chip"><strong>15</strong> SVGs</div>
+            <div class="stat-chip"><strong>17</strong> Brand Colors</div>
+            <div class="stat-chip"><strong>50</strong> Total Files</div>
+        </div>
+    </div>
+</header>
+
+<!-- Sticky Controls -->
+<div class="toolbar-sticky">
+    <div class="toolbar-container">
+        <div class="filter-tabs">
+            <button class="tab-btn active" data-filter="all">All (50)</button>
+            <button class="tab-btn" data-filter="images">Images (12)</button>
+            <button class="tab-btn" data-filter="assets">Assets (38)</button>
+            <button class="tab-btn" data-filter="svg">SVGs (15)</button>
+            <button class="tab-btn" data-filter="colors">Colors (17)</button>
+        </div>
+
+        <div class="search-box">
+            <span class="search-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </span>
+            <input type="text" id="filterInput" placeholder="Filter by name, e.g. logo, svg, banner..." autocomplete="off">
+        </div>
+    </div>
+</div>
+
+<main>
+    <div id="emptyNotice" class="no-matches">
+        <h3>No matching assets found</h3>
+        <p>Try searching for a different keyword or switch filter tabs.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 1: PUBLIC/ASSETS (38 files)                             -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section-block" data-category="assets">
+        <div class="section-head">
+            <div class="section-title">
+                <span>📁 Public Assets</span>
+                <span class="section-tag">38 files</span>
+            </div>
+            <div class="section-folder">public/assets/</div>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- 1. logo.png -->
+            <div class="gallery-card" data-filename="assets/logo.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">133 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/logo.png" onerror="this.onerror=null; this.src='public/assets/logo.png';" alt="logo.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/logo.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/logo.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. hero-banner-1.jpeg -->
+            <div class="gallery-card" data-filename="assets/hero-banner-1.jpeg" data-type="jpeg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">378 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="assets/hero-banner-1.jpeg" onerror="this.onerror=null; this.src='public/assets/hero-banner-1.jpeg';" alt="hero-banner-1.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/hero-banner-1.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('assets/hero-banner-1.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. hero-banner-2.png -->
+            <div class="gallery-card" data-filename="assets/hero-banner-2.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">218 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/hero-banner-2.png" onerror="this.onerror=null; this.src='public/assets/hero-banner-2.png';" alt="hero-banner-2.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/hero-banner-2.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/hero-banner-2.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. featured-product.jpeg -->
+            <div class="gallery-card" data-filename="assets/featured-product.jpeg" data-type="jpeg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">49 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="assets/featured-product.jpeg" onerror="this.onerror=null; this.src='public/assets/featured-product.jpeg';" alt="featured-product.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/featured-product.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('assets/featured-product.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. iso-certified.png -->
+            <div class="gallery-card" data-filename="assets/iso-certified.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">8.2 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/iso-certified.png" onerror="this.onerror=null; this.src='public/assets/iso-certified.png';" alt="iso-certified.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/iso-certified.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/iso-certified.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. payment-methods.png -->
+            <div class="gallery-card" data-filename="assets/payment-methods.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">27 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/payment-methods.png" onerror="this.onerror=null; this.src='public/assets/payment-methods.png';" alt="payment-methods.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/payment-methods.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/payment-methods.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 7. payment-partners.png -->
+            <div class="gallery-card" data-filename="assets/payment-partners.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">29 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/payment-partners.png" onerror="this.onerror=null; this.src='public/assets/payment-partners.png';" alt="payment-partners.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/payment-partners.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/payment-partners.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 8. reach-out-app.png -->
+            <div class="gallery-card" data-filename="assets/reach-out-app.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">48 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/reach-out-app.png" onerror="this.onerror=null; this.src='public/assets/reach-out-app.png';" alt="reach-out-app.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/reach-out-app.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/reach-out-app.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 9. app-store.jpeg -->
+            <div class="gallery-card" data-filename="assets/app-store.jpeg" data-type="jpeg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">3.5 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="assets/app-store.jpeg" onerror="this.onerror=null; this.src='public/assets/app-store.jpeg';" alt="app-store.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/app-store.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('assets/app-store.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 10. google-play.jpeg -->
+            <div class="gallery-card" data-filename="assets/google-play.jpeg" data-type="jpeg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">2.4 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="assets/google-play.jpeg" onerror="this.onerror=null; this.src='public/assets/google-play.jpeg';" alt="google-play.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/google-play.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('assets/google-play.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 11. asset 0.gif -->
+            <div class="gallery-card" data-filename="assets/asset 0.gif" data-type="gif" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">39 KB</span>
+                    <span class="badge-ext badge-gif">GIF</span>
+                    <img src="assets/asset%200.gif" onerror="this.onerror=null; this.src='public/assets/asset%200.gif';" alt="asset 0.gif" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 0.gif</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 0.gif')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 12. asset 1.png -->
+            <div class="gallery-card" data-filename="assets/asset 1.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">133 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/asset%201.png" onerror="this.onerror=null; this.src='public/assets/asset%201.png';" alt="asset 1.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 1.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 1.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 13. asset 2.jpeg -->
+            <div class="gallery-card" data-filename="assets/asset 2.jpeg" data-type="jpeg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">49 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="assets/asset%202.jpeg" onerror="this.onerror=null; this.src='public/assets/asset%202.jpeg';" alt="asset 2.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 2.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 2.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 14. asset 3.png -->
+            <div class="gallery-card" data-filename="assets/asset 3.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">27 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/asset%203.png" onerror="this.onerror=null; this.src='public/assets/asset%203.png';" alt="asset 3.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 3.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 3.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 15. asset 4.png -->
+            <div class="gallery-card" data-filename="assets/asset 4.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">29 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/asset%204.png" onerror="this.onerror=null; this.src='public/assets/asset%204.png';" alt="asset 4.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 4.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 4.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 16. asset 5.jpeg -->
+            <div class="gallery-card" data-filename="assets/asset 5.jpeg" data-type="jpeg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">2.4 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="assets/asset%205.jpeg" onerror="this.onerror=null; this.src='public/assets/asset%205.jpeg';" alt="asset 5.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 5.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 5.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 17. asset 6.jpeg -->
+            <div class="gallery-card" data-filename="assets/asset 6.jpeg" data-type="jpeg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">3.5 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="assets/asset%206.jpeg" onerror="this.onerror=null; this.src='public/assets/asset%206.jpeg';" alt="asset 6.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 6.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 6.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 18. asset 24.png -->
+            <div class="gallery-card" data-filename="assets/asset 24.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">48 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/asset%2024.png" onerror="this.onerror=null; this.src='public/assets/asset%2024.png';" alt="asset 24.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 24.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 24.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 19. asset 25.jpeg -->
+            <div class="gallery-card" data-filename="assets/asset 25.jpeg" data-type="jpeg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">378 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="assets/asset%2025.jpeg" onerror="this.onerror=null; this.src='public/assets/asset%2025.jpeg';" alt="asset 25.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 25.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 25.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 20. asset 26.png -->
+            <div class="gallery-card" data-filename="assets/asset 26.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">218 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/asset%2026.png" onerror="this.onerror=null; this.src='public/assets/asset%2026.png';" alt="asset 26.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 26.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 26.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 21. asset 27.png -->
+            <div class="gallery-card" data-filename="assets/asset 27.png" data-type="png" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">8.2 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="assets/asset%2027.png" onerror="this.onerror=null; this.src='public/assets/asset%2027.png';" alt="asset 27.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 27.png</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 27.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SVG Icons Subsection in Assets -->
+        <div style="margin-top: 36px; margin-bottom: 16px;">
+            <div class="section-title" style="font-size: 1.15rem;">
+                <span>✨ SVG Icons in Assets</span>
+                <span class="section-tag">15 files</span>
+            </div>
+        </div>
+
+        <div class="gallery-grid svg-grid">
+            <!-- 22. asset 7.svg -->
+            <div class="gallery-card" data-filename="assets/asset 7.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">6.2 KB</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%207.svg" onerror="this.onerror=null; this.src='public/assets/asset%207.svg';" alt="asset 7.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 7.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 7.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 23. asset 8.svg -->
+            <div class="gallery-card" data-filename="assets/asset 8.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">354 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%208.svg" onerror="this.onerror=null; this.src='public/assets/asset%208.svg';" alt="asset 8.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 8.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 8.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 24. asset 9.svg -->
+            <div class="gallery-card" data-filename="assets/asset 9.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">299 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%209.svg" onerror="this.onerror=null; this.src='public/assets/asset%209.svg';" alt="asset 9.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 9.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 9.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 25. asset 10.svg -->
+            <div class="gallery-card" data-filename="assets/asset 10.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">526 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2010.svg" onerror="this.onerror=null; this.src='public/assets/asset%2010.svg';" alt="asset 10.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 10.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 10.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 26. asset 11.svg -->
+            <div class="gallery-card" data-filename="assets/asset 11.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">294 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2011.svg" onerror="this.onerror=null; this.src='public/assets/asset%2011.svg';" alt="asset 11.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 11.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 11.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 27. asset 12.svg -->
+            <div class="gallery-card" data-filename="assets/asset 12.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">365 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2012.svg" onerror="this.onerror=null; this.src='public/assets/asset%2012.svg';" alt="asset 12.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 12.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 12.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 28. asset 13.svg -->
+            <div class="gallery-card" data-filename="assets/asset 13.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">346 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2013.svg" onerror="this.onerror=null; this.src='public/assets/asset%2013.svg';" alt="asset 13.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 13.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 13.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 29. asset 14.svg -->
+            <div class="gallery-card" data-filename="assets/asset 14.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">151 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2014.svg" onerror="this.onerror=null; this.src='public/assets/asset%2014.svg';" alt="asset 14.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 14.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 14.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 30. asset 15.svg -->
+            <div class="gallery-card" data-filename="assets/asset 15.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">363 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2015.svg" onerror="this.onerror=null; this.src='public/assets/asset%2015.svg';" alt="asset 15.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 15.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 15.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 31. asset 16.svg -->
+            <div class="gallery-card" data-filename="assets/asset 16.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">327 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2016.svg" onerror="this.onerror=null; this.src='public/assets/asset%2016.svg';" alt="asset 16.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 16.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 16.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 32. asset 17.svg -->
+            <div class="gallery-card" data-filename="assets/asset 17.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">365 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2017.svg" onerror="this.onerror=null; this.src='public/assets/asset%2017.svg';" alt="asset 17.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 17.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 17.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 33. asset 18.svg -->
+            <div class="gallery-card" data-filename="assets/asset 18.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">327 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2018.svg" onerror="this.onerror=null; this.src='public/assets/asset%2018.svg';" alt="asset 18.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 18.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 18.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 34. asset 19.svg -->
+            <div class="gallery-card" data-filename="assets/asset 19.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">241 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2019.svg" onerror="this.onerror=null; this.src='public/assets/asset%2019.svg';" alt="asset 19.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 19.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 19.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 35. asset 20.svg -->
+            <div class="gallery-card" data-filename="assets/asset 20.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">510 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2020.svg" onerror="this.onerror=null; this.src='public/assets/asset%2020.svg';" alt="asset 20.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 20.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 20.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 36. asset 21.svg -->
+            <div class="gallery-card" data-filename="assets/asset 21.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">269 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2021.svg" onerror="this.onerror=null; this.src='public/assets/asset%2021.svg';" alt="asset 21.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 21.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 21.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 37. asset 22.svg -->
+            <div class="gallery-card" data-filename="assets/asset 22.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">207 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2022.svg" onerror="this.onerror=null; this.src='public/assets/asset%2022.svg';" alt="asset 22.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 22.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 22.svg')">Copy</button>
+                </div>
+            </div>
+
+            <!-- 38. asset 23.svg -->
+            <div class="gallery-card" data-filename="assets/asset 23.svg" data-type="svg" data-folder="assets">
+                <div class="preview-area">
+                    <span class="badge-size">208 B</span>
+                    <span class="badge-ext badge-svg">SVG</span>
+                    <img src="assets/asset%2023.svg" onerror="this.onerror=null; this.src='public/assets/asset%2023.svg';" alt="asset 23.svg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">assets/asset 23.svg</div>
+                    <button class="copy-btn" onclick="copyText('assets/asset 23.svg')">Copy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 2: PUBLIC/IMAGES (12 files)                             -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section-block" data-category="images">
+        <div class="section-head">
+            <div class="section-title">
+                <span>🖼️ Public Images</span>
+                <span class="section-tag">12 files</span>
+            </div>
+            <div class="section-folder">public/images/</div>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- 1. logo.png -->
+            <div class="gallery-card" data-filename="images/logo.png" data-type="png" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">133 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="images/logo.png" onerror="this.onerror=null; this.src='public/images/logo.png';" alt="logo.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/logo.png</div>
+                    <button class="copy-btn" onclick="copyText('images/logo.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. logo-1.png -->
+            <div class="gallery-card" data-filename="images/logo-1.png" data-type="png" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">133 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="images/logo-1.png" onerror="this.onerror=null; this.src='public/images/logo-1.png';" alt="logo-1.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/logo-1.png</div>
+                    <button class="copy-btn" onclick="copyText('images/logo-1.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. favicon.png -->
+            <div class="gallery-card" data-filename="images/favicon.png" data-type="png" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">1.0 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="images/favicon.png" onerror="this.onerror=null; this.src='public/images/favicon.png';" alt="favicon.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/favicon.png</div>
+                    <button class="copy-btn" onclick="copyText('images/favicon.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. hero-banner-1.jpeg -->
+            <div class="gallery-card" data-filename="images/hero-banner-1.jpeg" data-type="jpeg" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">378 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="images/hero-banner-1.jpeg" onerror="this.onerror=null; this.src='public/images/hero-banner-1.jpeg';" alt="hero-banner-1.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/hero-banner-1.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('images/hero-banner-1.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. hero-banner-2.png -->
+            <div class="gallery-card" data-filename="images/hero-banner-2.png" data-type="png" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">218 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="images/hero-banner-2.png" onerror="this.onerror=null; this.src='public/images/hero-banner-2.png';" alt="hero-banner-2.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/hero-banner-2.png</div>
+                    <button class="copy-btn" onclick="copyText('images/hero-banner-2.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. featured-product.jpeg -->
+            <div class="gallery-card" data-filename="images/featured-product.jpeg" data-type="jpeg" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">49 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="images/featured-product.jpeg" onerror="this.onerror=null; this.src='public/images/featured-product.jpeg';" alt="featured-product.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/featured-product.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('images/featured-product.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 7. iso-certified.png -->
+            <div class="gallery-card" data-filename="images/iso-certified.png" data-type="png" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">8.2 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="images/iso-certified.png" onerror="this.onerror=null; this.src='public/images/iso-certified.png';" alt="iso-certified.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/iso-certified.png</div>
+                    <button class="copy-btn" onclick="copyText('images/iso-certified.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 8. payment-methods.png -->
+            <div class="gallery-card" data-filename="images/payment-methods.png" data-type="png" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">27 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="images/payment-methods.png" onerror="this.onerror=null; this.src='public/images/payment-methods.png';" alt="payment-methods.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/payment-methods.png</div>
+                    <button class="copy-btn" onclick="copyText('images/payment-methods.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 9. payment-partners.png -->
+            <div class="gallery-card" data-filename="images/payment-partners.png" data-type="png" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">29 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="images/payment-partners.png" onerror="this.onerror=null; this.src='public/images/payment-partners.png';" alt="payment-partners.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/payment-partners.png</div>
+                    <button class="copy-btn" onclick="copyText('images/payment-partners.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 10. reach-out-app.png -->
+            <div class="gallery-card" data-filename="images/reach-out-app.png" data-type="png" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">48 KB</span>
+                    <span class="badge-ext badge-png">PNG</span>
+                    <img src="images/reach-out-app.png" onerror="this.onerror=null; this.src='public/images/reach-out-app.png';" alt="reach-out-app.png" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/reach-out-app.png</div>
+                    <button class="copy-btn" onclick="copyText('images/reach-out-app.png')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 11. app-store.jpeg -->
+            <div class="gallery-card" data-filename="images/app-store.jpeg" data-type="jpeg" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">3.5 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="images/app-store.jpeg" onerror="this.onerror=null; this.src='public/images/app-store.jpeg';" alt="app-store.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/app-store.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('images/app-store.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+
+            <!-- 12. google-play.jpeg -->
+            <div class="gallery-card" data-filename="images/google-play.jpeg" data-type="jpeg" data-folder="images">
+                <div class="preview-area">
+                    <span class="badge-size">2.4 KB</span>
+                    <span class="badge-ext badge-jpeg">JPEG</span>
+                    <img src="images/google-play.jpeg" onerror="this.onerror=null; this.src='public/images/google-play.jpeg';" alt="google-play.jpeg" loading="lazy">
+                </div>
+                <div class="card-details">
+                    <div class="file-path">images/google-play.jpeg</div>
+                    <button class="copy-btn" onclick="copyText('images/google-play.jpeg')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                        Copy Path
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 3: BRAND COLOR PALETTE (17 colors)                      -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <section class="section-block" data-category="colors">
+        <div class="section-head">
+            <div class="section-title">
+                <span>🎨 Brand Colors (CSS Peeper / Figma)</span>
+                <span class="section-tag">17 colors</span>
+            </div>
+            <div class="section-folder">public/colors/figma-colors.json</div>
+        </div>
+
+        <div class="color-grid">
+            <div class="color-card" onclick="copyText('#005BAA')" data-filename="#005BAA royal blue">
+                <div class="swatch-fill" style="background: #005BAA;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#005BAA</div>
+                    <div class="swatch-name">Vestige Royal Blue</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#001E2B')" data-filename="#001E2B navy">
+                <div class="swatch-fill" style="background: #001E2B;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#001E2B</div>
+                    <div class="swatch-name">Deep Navy Blue</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#005BB2')" data-filename="#005BB2 accent blue">
+                <div class="swatch-fill" style="background: #005BB2;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#005BB2</div>
+                    <div class="swatch-name">Accent Royal Blue</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#198754')" data-filename="#198754 forest green">
+                <div class="swatch-fill" style="background: #198754;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#198754</div>
+                    <div class="swatch-name">Vestige Green</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#0AAD0A')" data-filename="#0AAD0A lime green">
+                <div class="swatch-fill" style="background: #0AAD0A;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#0AAD0A</div>
+                    <div class="swatch-name">Lime Accent Green</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#1D1D1D')" data-filename="#1D1D1D dark heading">
+                <div class="swatch-fill" style="background: #1D1D1D;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#1D1D1D</div>
+                    <div class="swatch-name">Heading Dark</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#21313C')" data-filename="#21313C slate">
+                <div class="swatch-fill" style="background: #21313C;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#21313C</div>
+                    <div class="swatch-name">Slate Dark</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#5C6C75')" data-filename="#5C6C75 muted text">
+                <div class="swatch-fill" style="background: #5C6C75;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#5C6C75</div>
+                    <div class="swatch-name">Muted Body Text</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#000000')" data-filename="#000000 black">
+                <div class="swatch-fill" style="background: #000000;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#000000</div>
+                    <div class="swatch-name">True Black</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#CCCCCC')" data-filename="#CCCCCC border gray">
+                <div class="swatch-fill" style="background: #CCCCCC;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#CCCCCC</div>
+                    <div class="swatch-name">Border Light Gray</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#D3D3D3')" data-filename="#D3D3D3 border muted">
+                <div class="swatch-fill" style="background: #D3D3D3;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#D3D3D3</div>
+                    <div class="swatch-name">Border Soft Gray</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#DEE2E6')" data-filename="#DEE2E6 divider">
+                <div class="swatch-fill" style="background: #DEE2E6;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#DEE2E6</div>
+                    <div class="swatch-name">Divider Gray</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#DFE2E1')" data-filename="#DFE2E1 border soft">
+                <div class="swatch-fill" style="background: #DFE2E1;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#DFE2E1</div>
+                    <div class="swatch-name">Border Soft</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#F0F3F2')" data-filename="#F0F3F2 mint background">
+                <div class="swatch-fill" style="background: #F0F3F2;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#F0F3F2</div>
+                    <div class="swatch-name">Mint Light BG</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#F3F3F3')" data-filename="#F3F3F3 off white">
+                <div class="swatch-fill" style="background: #F3F3F3;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#F3F3F3</div>
+                    <div class="swatch-name">Neutral Off-White</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#FBFCFB')" data-filename="#FBFCFB card surface">
+                <div class="swatch-fill" style="background: #FBFCFB;"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#FBFCFB</div>
+                    <div class="swatch-name">Card Surface Light</div>
+                </div>
+            </div>
+
+            <div class="color-card" onclick="copyText('#FFFFFF')" data-filename="#FFFFFF pure white">
+                <div class="swatch-fill" style="background: #FFFFFF; border-bottom: 1px solid rgba(255,255,255,0.1);"></div>
+                <div class="swatch-meta">
+                    <div class="swatch-hex">#FFFFFF</div>
+                    <div class="swatch-name">Pure White</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+    // ── Copy Function ──
+    function copyText(str) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(str).then(() => showToast(`Copied: ${str}`));
+        } else {
+            const ta = document.createElement('textarea');
+            ta.value = str;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast(`Copied: ${str}`);
+        }
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> ${msg}`;
+        t.classList.add('visible');
+        setTimeout(() => t.classList.remove('visible'), 2200);
+    }
+
+    // ── Filtering & Searching ──
+    const filterInput = document.getElementById('filterInput');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const cards = document.querySelectorAll('.gallery-card, .color-card');
+    const emptyNotice = document.getElementById('emptyNotice');
+    const sections = document.querySelectorAll('.section-block');
+
+    let currentFilter = 'all';
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+            applyFilters();
+        });
+    });
+
+    filterInput.addEventListener('input', () => {
+        applyFilters();
+    });
+
+    function applyFilters() {
+        const query = filterInput.value.toLowerCase().trim();
+        let totalVisible = 0;
+
+        cards.forEach(card => {
+            const name = (card.dataset.filename || '').toLowerCase();
+            const type = card.dataset.type || '';
+            const folder = card.dataset.folder || '';
+            const isColor = card.classList.contains('color-card');
+
+            // Tab filter check
+            let matchesTab = false;
+            if (currentFilter === 'all') matchesTab = true;
+            else if (currentFilter === 'images' && folder === 'images') matchesTab = true;
+            else if (currentFilter === 'assets' && folder === 'assets') matchesTab = true;
+            else if (currentFilter === 'svg' && type === 'svg') matchesTab = true;
+            else if (currentFilter === 'colors' && isColor) matchesTab = true;
+
+            // Search query check
+            const matchesQuery = !query || name.includes(query) || type.includes(query);
+
+            if (matchesTab && matchesQuery) {
+                card.classList.remove('filtered-out');
+                totalVisible++;
+            } else {
+                card.classList.add('filtered-out');
+            }
+        });
+
+        // Hide section headers if all cards inside are hidden
+        sections.forEach(sec => {
+            const visibleInSec = sec.querySelectorAll('.gallery-card:not(.filtered-out), .color-card:not(.filtered-out)').length;
+            sec.style.display = visibleInSec === 0 ? 'none' : 'block';
+        });
+
+        emptyNotice.classList.toggle('active', totalVisible === 0);
+    }
+</script>
+
+</body>
+</html>

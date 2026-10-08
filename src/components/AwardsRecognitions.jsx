@@ -73,11 +73,7 @@ export const AwardsRecognitions = () => {
         className="award-section relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden select-none"
         id="awards-section"
         style={{
-          backgroundImage: 'url("https://www.myvestige.com/images/theme/award-bg.png")',
-          backgroundColor: '#0a0d18',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundColor: '#0a0d18'
         }}
       >
         <div className="max-w-7xl mx-auto relative z-10">
@@ -139,86 +135,6 @@ export const AwardsRecognitions = () => {
         </div>
       </section>
 
-      {/* ====================================================================
-          2. Floating Element 1: Right Side "Visit Vestige Old Website"
-          ==================================================================== */}
-      <a
-        href="https://global.myvestige.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="visitweb fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-[#28a745] hover:bg-[#218838] text-white text-xs font-bold px-3 py-2.5 rounded-l-xl shadow-2xl leading-tight text-center transition-transform hover:-translate-x-1"
-        style={{
-          boxShadow: '-3px 4px 15px rgba(0, 0, 0, 0.35)',
-          lineHeight: '1.25'
-        }}
-        title="Open Legacy myvestige.com Portal"
-      >
-        Visit Vestige <br /> Old Website
-      </a>
-
-      {/* ====================================================================
-          3. Floating Element 2: Bottom-Left "Scroll to Top" Blue Circular Button
-          ==================================================================== */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed left-6 bottom-6 z-50 w-11 h-11 rounded-full bg-[#005baa] hover:bg-[#004785] active:scale-95 text-white flex items-center justify-center shadow-2xl transition-all duration-300 cursor-pointer ${
-          showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-        }`}
-        style={{
-          boxShadow: '0 4px 16px rgba(0, 91, 170, 0.45)'
-        }}
-        title="Scroll to Top"
-        aria-label="Scroll to Top"
-      >
-        <span className="text-sm font-extrabold">&#9650;</span>
-      </button>
-
-      {/* ====================================================================
-          4. Floating Element 3: Bottom-Right Victor Chatbot Launcher
-          - Notification Badge: "1" in red circle
-          - Speech Pill: "Need Help? Ask VICTOR"
-          - Circular Avatar Button
-          ==================================================================== */}
-      <div className="fixed right-6 bottom-6 z-50 flex items-center gap-3 select-none">
-        {/* Speech Bubble Pill */}
-        <div 
-          onClick={() => {
-            const el = document.getElementById('victor-dialog');
-            if (el) el.classList.toggle('active');
-          }}
-          className="bg-white text-slate-800 text-xs font-bold px-3.5 py-2 rounded-full shadow-xl border border-slate-200 cursor-pointer hover:shadow-2xl transition-all flex items-center gap-1.5"
-        >
-          <span>Need Help? Ask VICTOR</span>
-          <span className="text-[10px] text-slate-400 hover:text-slate-600">&times;</span>
-        </div>
-
-        {/* Circular Victor Avatar Button with Badge (1) */}
-        <div className="relative">
-          <button
-            id="ask-victor-trigger-btn-react"
-            onClick={() => {
-              const el = document.getElementById('victor-dialog');
-              if (el) el.classList.toggle('active');
-            }}
-            className="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-700 to-indigo-600 p-0.5 shadow-2xl hover:scale-105 active:scale-95 transition-transform cursor-pointer overflow-visible flex items-center justify-center"
-            title="Chat with Victor - Vestige Digital Assistant"
-            aria-label="Ask Victor Digital Assistant"
-          >
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsapqs_JCwH0tK5WO4ACNnjcBWN58rEG0-sREHFr3CGw3knHliAw"
-              alt="Victor Assistant"
-              className="w-full h-full rounded-full object-cover border-2 border-white"
-            />
-          </button>
-
-          {/* Red Notification Badge with Number 1 */}
-          <span 
-            className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 text-white text-[11px] font-black rounded-full flex items-center justify-center shadow-md border-2 border-white pointer-events-none animate-pulse"
-          >
-            1
-          </span>
-        </div>
-      </div>
     </>
   );
 };

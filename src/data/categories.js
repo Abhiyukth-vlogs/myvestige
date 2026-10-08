@@ -7,7 +7,7 @@ export const categories = [
     id: 'health-supplements',
     name: 'Health Supplements',
     tagline: 'World-Class Health & Wellness Formulations',
-    icon: 'heart-pulse',
+    icon: '/assets/asset 10.svg',
     count: '64+ Products',
     subcategories: [
       { id: 'pro-heart', name: 'Pro Heart', count: 8 },
@@ -26,7 +26,7 @@ export const categories = [
     id: 'pro-heart',
     name: 'Pro Heart',
     tagline: 'Cardiovascular Support & Omega-3 Formulations',
-    icon: 'activity',
+    icon: '/assets/asset 11.svg',
     count: '8 Products',
     subcategories: [
       { id: 'flax-oil', name: 'Vestige Flax Oil', count: 1 },
@@ -39,7 +39,7 @@ export const categories = [
     id: 'joints-bones-health',
     name: 'Joints & Bones Health',
     tagline: 'Glucosamine, Calcium & Bone Strength Formulations',
-    icon: 'shield',
+    icon: '/assets/asset 12.svg',
     count: '6 Products',
     subcategories: [
       { id: 'glucosamine', name: 'Vestige Glucosamine', count: 1 },
@@ -51,7 +51,7 @@ export const categories = [
     id: 'immunity-booster',
     name: 'Immunity Booster',
     tagline: 'Spirulina, Noni, Colostrum & Aloe Vera Range',
-    icon: 'shield-check',
+    icon: '/assets/asset 13.svg',
     count: '12 Products',
     subcategories: [
       { id: 'spirulina', name: 'Vestige Spirulina', count: 1 },
@@ -65,7 +65,7 @@ export const categories = [
     id: 'weight-management',
     name: 'Weight Management',
     tagline: 'Veslim Shake, Veslim Tea & Veslim Capsules',
-    icon: 'scale',
+    icon: '/assets/asset 14.svg',
     count: '5 Products',
     subcategories: [
       { id: 'veslim-shake', name: 'Veslim Shake (Mango / Vanilla)', count: 2 },
@@ -77,7 +77,7 @@ export const categories = [
     id: 'fitness-diet',
     name: 'Fitness & Diet',
     tagline: 'Protein Powder & Active Daily Nutrition',
-    icon: 'zap',
+    icon: '/assets/asset 15.svg',
     count: '7 Products',
     subcategories: [
       { id: 'protein-powder', name: 'Vestige Protein Powder', count: 2 },
@@ -88,7 +88,7 @@ export const categories = [
     id: 'personal-care',
     name: 'Personal Care',
     tagline: 'Assure Hair, Skin & Body Radiance',
-    icon: 'sparkles',
+    icon: '/assets/asset 16.svg',
     count: '42 Products',
     subcategories: [
       { id: 'hair-care', name: 'Hair Care', count: 12 },
@@ -102,7 +102,7 @@ export const categories = [
     id: 'ayurvedic-care',
     name: 'Ayusante (Ayurvedic Care)',
     tagline: 'Clinically Validated Ayurvedic Science',
-    icon: 'leaf',
+    icon: '/assets/asset 17.svg',
     count: '14 Products',
     subcategories: [
       { id: 'respocare', name: 'Ayusante RespoCare', count: 1 },
@@ -116,7 +116,7 @@ export const categories = [
     id: 'health-food',
     name: 'Health Food',
     tagline: 'Zeta Tea & Coffee, Lite House Rice Bran Oil, Enerva',
-    icon: 'coffee',
+    icon: '/assets/asset 18.svg',
     count: '18 Products',
     subcategories: [
       { id: 'health-food-drink', name: 'Health Food Drink', count: 4 },
@@ -129,7 +129,7 @@ export const categories = [
     id: 'home-hygiene',
     name: 'Home Hygiene',
     tagline: 'Hyvest Cleaning & Laundry Essentials',
-    icon: 'home',
+    icon: '/assets/asset 19.svg',
     count: '8 Products',
     subcategories: [
       { id: 'ultra-wash', name: 'Ultra Wash Laundry Detergent', count: 2 },
@@ -142,7 +142,7 @@ export const categories = [
     id: 'make-up',
     name: 'Make-Up (Mistral of Milan)',
     tagline: 'European Color Cosmetics & Beauty',
-    icon: 'smile',
+    icon: '/assets/asset 20.svg',
     count: '32 Products',
     subcategories: [
       { id: 'face', name: 'Face (Compact & Foundation)', count: 10 },
@@ -155,7 +155,7 @@ export const categories = [
     id: 'agricultural',
     name: 'Agricultural',
     tagline: 'Agri 82 Crop Yield Enhancers & Soil Activators',
-    icon: 'sprout',
+    icon: '/assets/asset 21.svg',
     count: '6 Products',
     subcategories: [
       { id: 'agri-82', name: 'Agri 82', count: 2 },

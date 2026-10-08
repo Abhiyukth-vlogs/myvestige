@@ -6,15 +6,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --primary-blue: #1f579c;
-  --primary-blue-dark: #164075;
-  --primary-blue-light: #2d6fc0;
-  --accent-gold: #f59e0b;
-  --accent-green: #059669;
-  --text-dark: #222222;
-  --text-muted: #666666;
-  --bg-light: #f7f9fa;
-  --border-light: #e2e8f0;
+  --primary-blue: #005BAA;
+  --primary-blue-dark: #001E2B;
+  --primary-blue-light: #005BB2;
+  --accent-gold: #DDB96B;
+  --accent-gold-light: #FFD57B;
+  --accent-green: #198754;
+  --accent-green-vibrant: #0AAD0A;
+  --text-dark: #1D1D1D;
+  --text-slate: #21313C;
+  --text-muted: #5C6C75;
+  --bg-light: #F0F3F2;
+  --bg-surface: #FBFCFB;
+  --border-light: #DEE2E6;
+  --border-soft: #DFE2E1;
+  --border-gray: #CCCCCC;
 }
 
 *, *::before, *::after {
@@ -1682,6 +1688,57 @@ a.visitweb.btn.btn-success:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Anti-Gravity UI: Glassmorphism, 3D Tilt, Floating & Smooth Motion
+   ========================================================================== */
+.antigravity-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(222, 226, 230, 0.7);
+  box-shadow: 0 10px 30px -5px rgba(0, 91, 170, 0.1), 0 4px 10px -2px rgba(0, 30, 43, 0.05);
+}
+
+.antigravity-glass-dark {
+  background: rgba(0, 30, 43, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(221, 185, 107, 0.25);
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(221, 185, 107, 0.15);
+}
+
+.antigravity-float {
+  animation: floatElevation 4s ease-in-out infinite;
+}
+
+.antigravity-float-delay {
+  animation: floatElevation 5s ease-in-out 1.5s infinite;
+}
+
+@keyframes floatElevation {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.antigravity-card-3d {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  will-change: transform, box-shadow;
+}
+
+.antigravity-card-3d:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 16px 36px -6px rgba(0, 91, 170, 0.2), 0 6px 14px -3px rgba(0, 30, 43, 0.08);
+}
+
+.antigravity-glow-gold {
+  box-shadow: 0 0 25px rgba(221, 185, 107, 0.4), 0 0 50px rgba(0, 91, 170, 0.2);
+}
+
 
 
 

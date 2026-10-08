@@ -63,9 +63,12 @@ export const Hero = ({ onAddToCart }) => {
               <span className="badge-pv">★ 41.67 PV</span>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=600&q=80"
+              src="/assets/featured-product.jpeg"
               alt="Vestige Prime Krill Oil"
               className="hero-product-img"
+              onError={(e) => {
+                e.currentTarget.src = '/assets/asset 2.jpeg';
+              }}
             />
             <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#34d399', textTransform: 'uppercase' }}>
               VESTIGE PRIME

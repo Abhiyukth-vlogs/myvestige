@@ -101,38 +101,55 @@ export const AppContent = () => {
       <Downloads />
 
       {/* 10. Official Mobile App Download Banner */}
-      <section style={{ background: 'linear-gradient(135deg, #0a192f, #059669)', color: 'white', padding: '60px 0' }}>
+      {/* 10. Official Mobile App Download Banner */}
+      <section style={{ background: 'linear-gradient(135deg, #001E2B, #198754)', color: 'white', padding: '60px 0' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '32px' }}>
           <div style={{ maxWidth: '620px' }}>
-            <span style={{ color: '#fbbf24', fontSize: '0.82rem', fontWeight: 800, textTransform: 'uppercase' }}>
+            <span style={{ color: '#DDB96B', fontSize: '0.82rem', fontWeight: 800, textTransform: 'uppercase' }}>
               Manage Business on the Go
             </span>
             <h3 style={{ fontSize: '2rem', fontWeight: 800, margin: '8px 0 12px' }}>
               Download Vestige Mobile &amp; POS App
             </h3>
-            <p style={{ color: '#cbd5e1', fontSize: '0.95rem', lineHeight: 1.6 }}>
+            <p style={{ color: '#DFE2E1', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '20px' }}>
               Track downline volume, verify consistency vouchers, place repurchase orders, and access real-time training schedules directly from your smartphone.
             </p>
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.vestigeshopping"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Get on Google Play"
+              >
+                <img
+                  src="/assets/google-play.jpeg"
+                  alt="Google Play Store"
+                  style={{ height: '44px', width: 'auto', borderRadius: '6px' }}
+                  onError={(e) => { e.currentTarget.src = '/assets/asset 5.jpeg'; }}
+                />
+              </a>
+              <a
+                href="https://apps.apple.com/in/app/vestige-online-shopping-app/id1448596224"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Download on Apple App Store"
+              >
+                <img
+                  src="/assets/app-store.jpeg"
+                  alt="Apple App Store"
+                  style={{ height: '44px', width: 'auto', borderRadius: '6px' }}
+                  onError={(e) => { e.currentTarget.src = '/assets/asset 6.jpeg'; }}
+                />
+              </a>
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.vestigebestdeals.android"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-              style={{ border: '1px solid rgba(255,255,255,0.2)' }}
-            >
-              <span>📱 Google Play Store</span>
-            </a>
-            <a
-              href="https://apps.apple.com/in/app/vestige-online-shopping-app/id1439294943"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-              style={{ border: '1px solid rgba(255,255,255,0.2)' }}
-            >
-              <span>🍏 Apple App Store</span>
-            </a>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <img
+              src="/assets/reach-out-app.png"
+              alt="Vestige Mobile App Experience"
+              style={{ maxHeight: '240px', width: 'auto', objectFit: 'contain' }}
+              onError={(e) => { e.currentTarget.src = '/assets/asset 24.png'; }}
+            />
           </div>
         </div>
       </section>

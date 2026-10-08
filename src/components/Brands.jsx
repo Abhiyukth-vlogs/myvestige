@@ -20,11 +20,23 @@ export const Brands = () => {
                 className="brand-logo-circle antigravity-float"
                 style={{
                   background: 'linear-gradient(135deg, #0a192f, #1e293b)',
-                  color: '#34d399',
-                  border: '1px solid rgba(255,255,255,0.1)'
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  overflow: 'hidden'
                 }}
               >
-                {b.name.substring(0, 2).toUpperCase()}
+                <img
+                  src={`https://vestdata.s3.ap-southeast-1.amazonaws.com/brands/${b.name.replace(/\s+/g, '')}.png`}
+                  alt={b.name}
+                  style={{ width: '80%', height: '80%', objectFit: 'contain' }}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerText = b.name.substring(0, 2).toUpperCase();
+                    e.target.parentElement.style.color = '#34d399';
+                  }}
+                />
               </div>
               <h4 className="brand-card-name">{b.name}</h4>
               <p className="brand-card-category">{b.category}</p>
@@ -39,7 +51,7 @@ export const Brands = () => {
                   fontWeight: 700
                 }}
               >
-                {b.productsCount}
+                {b.productsCount} Products
               </div>
             </div>
           ))}
