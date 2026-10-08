@@ -224,27 +224,252 @@ header {
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-/* Header Login Button */
-.loginbtn {
-  background: transparent;
-  color: #ffffff;
-  border: 1.5px solid #ffffff;
-  padding: 6px 18px;
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+/* ==========================================================================
+   Header Utility Strip & Top Bar
+   ========================================================================== */
+.header-utility-strip {
+  background: #001726;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.78rem;
+  color: #94a3b8;
+  padding: 5px 0;
+}
+
+.utility-strip-inner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.utility-strip-left, .utility-strip-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.utility-strip-link {
+  color: #cbd5e1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s ease;
+}
+
+.utility-strip-link:hover {
+  color: #38bdf8;
+}
+
+.utility-strip-badge {
+  background: rgba(221, 185, 107, 0.15);
+  color: #ddb96b;
+  border: 1px solid rgba(221, 185, 107, 0.3);
+  padding: 1px 8px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.72rem;
+}
+
+/* Header Login & Sign Up Actions (Modern Look) */
+.header-auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginbtn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  padding: 7px 16px;
+  font-family: 'Inter', 'Oswald', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 8px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
   gap: 6px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
 }
 
 .loginbtn:hover {
   background: #ffffff;
   color: var(--primary-blue);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  border-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.signupbtn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: 1px solid rgba(52, 211, 153, 0.6);
+  padding: 7px 18px;
+  font-family: 'Inter', 'Oswald', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: 8px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+.signupbtn:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  transform: translateY(-1px);
+  color: #ffffff;
+}
+
+.header-cart-btn {
+  position: relative;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.header-cart-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.05);
+}
+
+.header-cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Auth Modal Tabs (Login & Sign Up New Look) */
+.auth-tabs-header {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 22px;
+  gap: 4px;
+}
+
+.auth-tab-btn {
+  flex: 1;
+  padding: 10px 14px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.auth-tab-btn.active {
+  background: #ffffff;
+  color: var(--primary-blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.auth-tab-content {
+  display: none;
+}
+
+.auth-tab-content.active {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+.auth-input-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.auth-input-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.auth-input-field {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  outline: none;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.auth-input-field:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 91, 170, 0.15);
+}
+
+.demo-chip-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border: 1px dashed #86efac;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #166534;
+}
+
+.demo-chip-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.demo-chip-btn:hover {
+  background: #16a34a;
 }
 
 /* Navigation Bar */

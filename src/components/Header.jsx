@@ -130,16 +130,16 @@ export const Header = ({ onOpenCart, onOpenDistributor, cartCount }) => {
            ======================================================================== */}
       <header className="main-header">
         <div className="container header-container">
-          {/* Original Vestige Logo */}
+          {/* Original Vestige Logo (Extracted assets) */}
           <a href="/" className="brand-logo-wrap" title="Vestige Marketing Pvt. Ltd. - Wish You Wellth">
             <img
-              src="/images/logo-1.png"
+              src="/images/logo.png"
               alt="Vestige - Wish You Wellth"
               className="original-brand-logo"
-              style={{ height: '46px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '52px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))' }}
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = 'https://www.myvestige.com/images/theme/logo-1.png';
+                e.target.src = '/assets/logo.png';
               }}
             />
           </a>
@@ -206,20 +206,49 @@ export const Header = ({ onOpenCart, onOpenDistributor, cartCount }) => {
             )}
           </div>
 
-          {/* Header Actions */}
+          {/* Header Actions: Modern Login & Sign Up */}
           <div className="header-actions">
             <button
               type="button"
               id="distributor-portal-btn"
               className="btn btn-secondary"
               onClick={onOpenDistributor}
-              style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+              style={{ padding: '8px 16px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              Distributor Login
+              Login
+            </button>
+
+            <button
+              type="button"
+              id="distributor-signup-btn"
+              className="signupbtn"
+              onClick={onOpenDistributor}
+              style={{
+                padding: '8px 18px',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                color: 'white',
+                border: '1px solid rgba(52, 211, 153, 0.5)',
+                borderRadius: '8px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 14px rgba(16, 185, 129, 0.35)'
+              }}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+              Sign Up
             </button>
 
             <a href="#products" className="action-icon-btn" title="View Wishlist">

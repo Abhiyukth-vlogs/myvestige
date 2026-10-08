@@ -1295,4 +1295,210 @@
   gap: 8px;
 }
 
+/* ==========================================================================
+   New Look Header & Authentication System (Login & Sign Up)
+   ========================================================================== */
+.header-top-utility {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.78rem;
+  color: #cbd5e1;
+}
+
+.utility-hotline-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #e2e8f0;
+}
+
+.utility-hotline-item a {
+  color: #34d399;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.header-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 10px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-main-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+  transition: transform 0.25s ease;
+}
+
+.brand-main-logo:hover {
+  transform: scale(1.03);
+}
+
+.brand-title-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.brand-tagline-text {
+  font-size: 0.75rem;
+  color: #fbbf24;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header-search-box {
+  flex: 1;
+  max-width: 440px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header-search-input {
+  width: 100%;
+  padding: 9px 40px 9px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.header-search-input::placeholder {
+  color: #cbd5e1;
+}
+
+.header-search-input:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #38bdf8;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
+.header-search-btn-icon {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Auth Action Hub: Modern Login & Sign Up Look */
+.header-auth-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-header-signin {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-header-signin:hover {
+  background: #ffffff;
+  color: #005BAA;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.btn-header-signup {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.btn-header-signup:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn-header-cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fef08a;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-header-cart:hover {
+  background: rgba(245, 158, 11, 0.35);
+  transform: translateY(-1px);
+}
+
+.cart-count-badge {
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 9999px;
+}
+
 

@@ -6,6 +6,7 @@
 
 import { products } from './data/products.js';
 import { brands } from './data/brands.js';
+import confetti from 'canvas-confetti';
 
 // ============================================================================
 // 0. Global Toast Notification System
@@ -388,23 +389,63 @@ function setupLanguageModal() {
 }
 
 // ============================================================================
-// 7. Login & Forgot Password Modals
+// 7. Login & Sign Up Unified Modal with New Look & Forgot Password
 // ============================================================================
 function setupLoginModals() {
   const loginTrigger = document.getElementById('login');
   const navLoginLink = document.getElementById('nav-login-link');
+  const signupTrigger = document.getElementById('signup-btn');
+  const navSignupLink = document.getElementById('nav-signup-link');
+
   const loginModal = document.getElementById('loginPopupModal');
   const closeLogin = document.getElementById('close-login-modal');
 
+  // Tabs
+  const tabBtnLogin = document.getElementById('tab-btn-login');
+  const tabBtnSignup = document.getElementById('tab-btn-signup');
+  const panelLogin = document.getElementById('auth-panel-login');
+  const panelSignup = document.getElementById('auth-panel-signup');
+  const switchToSignup = document.getElementById('switch-to-signup-link');
+  const switchToLogin = document.getElementById('switch-to-login-link');
+
+  // Login Form elements
+  const loginForm = document.getElementById('auth-login-form');
+  const loginIdInput = document.getElementById('login-id-input');
+  const pwdInput = document.getElementById('login-pwd-input');
+  const togglePwdBtn = document.getElementById('toggle-pwd-btn');
+  const demoAutofillBtn = document.getElementById('demo-autofill-btn');
+
+  // Sign Up Form elements
+  const signupForm = document.getElementById('auth-signup-form');
+  const signupNameInput = document.getElementById('signup-name-input');
+
+  // Forgot password
   const openForgotLink = document.getElementById('open-forgot-pwd');
   const forgotModal = document.getElementById('forgotpwdPopup');
   const closeForgot = document.getElementById('close-forgot-modal');
   const cancelForgot = document.getElementById('cancel-forgot-modal');
 
-  const togglePwdBtn = document.getElementById('toggle-pwd-btn');
-  const pwdInput = document.getElementById('login-pwd-input');
+  function showLoginTab() {
+    tabBtnLogin?.classList.add('active');
+    tabBtnSignup?.classList.remove('active');
+    panelLogin?.classList.add('active');
+    panelSignup?.classList.remove('active');
+  }
+
+  function showSignupTab() {
+    tabBtnSignup?.classList.add('active');
+    tabBtnLogin?.classList.remove('active');
+    panelSignup?.classList.add('active');
+    panelLogin?.classList.remove('active');
+  }
 
   function openLogin() {
+    showLoginTab();
+    loginModal?.classList.add('active');
+  }
+
+  function openSignup() {
+    showSignupTab();
     loginModal?.classList.add('active');
   }
 
@@ -412,9 +453,18 @@ function setupLoginModals() {
     loginModal?.classList.remove('active');
   }
 
+  // Open triggers
   loginTrigger?.addEventListener('click', openLogin);
   navLoginLink?.addEventListener('click', openLogin);
+  signupTrigger?.addEventListener('click', openSignup);
+  navSignupLink?.addEventListener('click', openSignup);
   closeLogin?.addEventListener('click', closeLoginModal);
+
+  // Tab switcher
+  tabBtnLogin?.addEventListener('click', showLoginTab);
+  tabBtnSignup?.addEventListener('click', showSignupTab);
+  switchToSignup?.addEventListener('click', showSignupTab);
+  switchToLogin?.addEventListener('click', showLoginTab);
 
   loginModal?.addEventListener('click', (e) => {
     if (e.target === loginModal) closeLoginModal();
@@ -429,6 +479,66 @@ function setupLoginModals() {
     } else {
       pwdInput.type = 'password';
       togglePwdBtn.textContent = '👁️';
+    }
+  });
+
+  // Demo Credentials Auto-Fill
+  demoAutofillBtn?.addEventListener('click', () => {
+    if (loginIdInput) loginIdInput.value = '78291044';
+    if (pwdInput) pwdInput.value = 'vestige2026';
+    showToast('Demo Distributor credentials auto-filled!', 'info');
+  });
+
+  // Login Form Submission
+  loginForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = loginIdInput?.value || '78291044';
+    closeLoginModal();
+    showToast(`Welcome back, Crown Director! Logged in as #${id}`, 'success');
+    try {
+      confetti({ particleCount: 40, spread: 60, origin: { y: 0.2 } });
+    } catch (_) {}
+
+    // Update Header Login button state to logged-in badge
+    if (loginTrigger) {
+      loginTrigger.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>#${id} (Crown)</span>
+      `;
+      loginTrigger.style.borderColor = '#10b981';
+      loginTrigger.style.background = 'rgba(16, 185, 129, 0.15)';
+    }
+  });
+
+  // Sign Up Form Submission
+  signupForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = signupNameInput?.value || 'Distributor';
+    const randomId = '89' + Math.floor(100000 + Math.random() * 900000);
+    closeLoginModal();
+    try {
+      confetti({ particleCount: 100, spread: 80, origin: { y: 0.4 } });
+    } catch (_) {}
+    showToast(`🎉 Registration Successful! Welcome to Vestige, ${name}! Your new Distributor ID: ${randomId}`, 'success');
+
+    // Update Header Buttons
+    if (loginTrigger) {
+      loginTrigger.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>#${randomId}</span>
+      `;
+      loginTrigger.style.borderColor = '#10b981';
+      loginTrigger.style.background = 'rgba(16, 185, 129, 0.15)';
+    }
+    if (signupTrigger) {
+      signupTrigger.textContent = 'Active Partner ✓';
+      signupTrigger.style.opacity = '0.9';
     }
   });
 

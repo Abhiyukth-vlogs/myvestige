@@ -65,7 +65,7 @@ export const Footer = () => {
             <div className="inner-logo mb-4">
               <a href="/">
                 <img 
-                  src="/images/logo-1.png" 
+                  src="/images/logo.png" 
                   alt="Vestige - Wish You Wellth" 
                   className="h-16 w-auto object-contain"
                   onError={(e) => {

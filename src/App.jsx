@@ -29,7 +29,13 @@ export const AppContent = () => {
   ]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isDistributorOpen, setIsDistributorOpen] = useState(false);
+  const [distributorInitialTab, setDistributorInitialTab] = useState('login');
   const [quickViewProduct, setQuickViewProduct] = useState(null);
+
+  const handleOpenDistributor = (tab = 'login') => {
+    setDistributorInitialTab(tab);
+    setIsDistributorOpen(true);
+  };
 
   const handleAddToCart = (productId) => {
     const p = products.find(prod => prod.id === productId);
@@ -62,7 +68,7 @@ export const AppContent = () => {
       {/* 1. Header with Top Utility Bar + Region Toggle + Mega-Menu */}
       <Header
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenDistributor={() => setIsDistributorOpen(true)}
+        onOpenDistributor={handleOpenDistributor}
         cartCount={cartCount}
       />
 
@@ -172,6 +178,7 @@ export const AppContent = () => {
       <DistributorModal
         isOpen={isDistributorOpen}
         onClose={() => setIsDistributorOpen(false)}
+        initialTab={distributorInitialTab}
       />
 
       {/* 14. Quick View Product Modal */}
