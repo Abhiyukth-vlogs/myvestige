@@ -7,6 +7,7 @@
 import { products } from './data/products.js';
 import { brands } from './data/brands.js';
 import confetti from 'canvas-confetti';
+import { SUCCESS_STORIES } from './data/successStories.js';
 
 // ============================================================================
 // 0. Global Toast Notification System
@@ -812,7 +813,256 @@ function setupScrollToTop() {
 }
 
 // ============================================================================
-// 12. Application Bootstrap
+// 12. VMC Success Stories (Vestige Millionaire Club) - 47 Real Members
+// ============================================================================
+function setupVMCSuccessStories() {
+  const container = document.getElementById('vmc-stories-section');
+  if (!container) return;
+
+  const stories = SUCCESS_STORIES || [];
+  let currentIndex = 0;
+  const CARDS_PER_PAGE = 4;
+  let viewMode = 'carousel'; // 'carousel' | 'grid'
+  let filterQuery = '';
+
+  function getFiltered() {
+    if (!filterQuery) return stories;
+    const q = filterQuery.toLowerCase();
+    return stories.filter(
+      (s) =>
+        s.name.toLowerCase().includes(q) ||
+        s.directorId.includes(q) ||
+        s.message.toLowerCase().includes(q)
+    );
+  }
+
+  function render() {
+    const list = getFiltered();
+    const maxIdx = Math.max(0, list.length - CARDS_PER_PAGE);
+    if (currentIndex > maxIdx) currentIndex = maxIdx;
+
+    const displayed =
+      viewMode === 'carousel'
+        ? list.slice(currentIndex, currentIndex + CARDS_PER_PAGE)
+        : list;
+
+    container.innerHTML = `
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap;">
+          <img 
+            src="https://www.myvestige.com/VMVCM-unit.png" 
+            alt="Vestige Millionaire Club" 
+            class="vmcm-logo"
+            style="max-height: 52px; width: auto; display: inline-block;"
+            onerror="this.src='/images/logo.png'"
+          >
+          <span style="background: #fef3c7; color: #92400e; border: 1px solid #fde68a; font-weight: 700; font-size: 0.76rem; padding: 3px 10px; border-radius: 9999px;">
+            ${stories.length} Official VMC Leaders
+          </span>
+        </div>
+        <p style="font-size: 0.88rem; color: #64748b; max-width: 720px; margin: 0 auto;">
+          Meet the inspiring direct selling pioneers of the <strong>Vestige Millionaire Club</strong> who turned dedication into lifelong wealth and freedom.
+        </p>
+
+        <!-- Controls: Search, View Mode & Carousel Nav -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; flex-wrap: wrap;">
+          <input 
+            type="text" 
+            id="vmc-search-input" 
+            placeholder="Search 47 Leaders by Name or ID..." 
+            value="${filterQuery}"
+            style="padding: 7px 14px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.84rem; min-width: 240px; outline: none; background: white;"
+          >
+
+          <div style="display: inline-flex; background: #e2e8f0; padding: 2px; border-radius: 8px; font-size: 0.8rem; font-weight: 700;">
+            <button id="vmc-btn-carousel" style="padding: 5px 12px; border-radius: 6px; cursor: pointer; border: none; background: ${viewMode === 'carousel' ? 'white' : 'transparent'}; color: ${viewMode === 'carousel' ? '#005baa' : '#64748b'}; box-shadow: ${viewMode === 'carousel' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'};">
+              Carousel (4/Slide)
+            </button>
+            <button id="vmc-btn-grid" style="padding: 5px 12px; border-radius: 6px; cursor: pointer; border: none; background: ${viewMode === 'grid' ? 'white' : 'transparent'}; color: ${viewMode === 'grid' ? '#005baa' : '#64748b'}; box-shadow: ${viewMode === 'grid' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'};">
+              All 47 Leaders Grid
+            </button>
+          </div>
+
+          ${
+            viewMode === 'carousel'
+              ? `
+            <div style="display: inline-flex; gap: 6px;">
+              <button id="vmc-prev-btn" style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #cbd5e1; background: white; cursor: pointer; font-weight: bold;">
+                &#10094;
+              </button>
+              <button id="vmc-next-btn" style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #cbd5e1; background: white; cursor: pointer; font-weight: bold;">
+                &#10095;
+              </button>
+            </div>
+          `
+              : ''
+          }
+        </div>
+
+        ${
+          viewMode === 'carousel'
+            ? `
+          <div style="font-size: 0.78rem; color: #64748b; margin-top: 10px;">
+            Showing Leaders <strong>${currentIndex + 1}</strong> - <strong>${Math.min(currentIndex + CARDS_PER_PAGE, list.length)}</strong> of <strong>${list.length}</strong>
+          </div>
+        `
+            : ''
+        }
+      </div>
+
+      <div class="vmc-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+        ${displayed
+          .map(
+            (leader) => `
+          <div class="vmc-card antigravity-card-3d" data-leader-id="${leader.directorId}" style="background: white; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+            <div class="vmc-header" style="position: relative; background: #f8fafc; padding: 12px; text-align: center;">
+              <img 
+                src="${leader.photoUrl}" 
+                alt="${leader.name}" 
+                class="vmc-avatar"
+                style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px;"
+                loading="lazy"
+                onerror="this.src='/images/logo.png'"
+              >
+              <span class="vmc-badge" style="position: absolute; top: 18px; left: 18px; background: rgba(15,23,42,0.85); color: white; padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; font-weight: 700;">
+                ID: ${leader.directorId}
+              </span>
+              <span style="position: absolute; top: 18px; right: 18px; background: #f59e0b; color: #1e1b4b; padding: 2px 8px; border-radius: 9999px; font-size: 0.68rem; font-weight: 800;">
+                👑 VMC
+              </span>
+            </div>
+            <div class="vmc-body" style="padding: 16px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
+              <div>
+                <h4 class="vmc-name" style="font-family: 'Oswald', sans-serif; font-size: 1.05rem; font-weight: 700; color: #0f172a; margin-bottom: 2px; text-transform: uppercase;">
+                  ${leader.name}
+                </h4>
+                <div style="font-size: 0.74rem; color: #059669; font-weight: 700; margin-bottom: 8px;">
+                  Vestige Ambassador • Club Achiever
+                </div>
+                <p class="vmc-quote" style="font-size: 0.8rem; color: #475569; font-style: italic; line-height: 1.5; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                  "${leader.message}"
+                </p>
+              </div>
+              <div class="vmc-footer" style="padding-top: 10px; border-top: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.72rem; color: #94a3b8;">Distributor ID: ${leader.directorId}</span>
+                <button type="button" class="btn-read-vmc" data-id="${leader.directorId}" style="color: #005baa; font-weight: 700; font-size: 0.78rem; border: none; background: none; cursor: pointer;">
+                  Read More ➔
+                </button>
+              </div>
+            </div>
+          </div>
+        `
+          )
+          .join('')}
+      </div>
+    `;
+
+    // Bind Controls
+    const searchInput = document.getElementById('vmc-search-input');
+    searchInput?.addEventListener('input', (e) => {
+      filterQuery = e.target.value;
+      currentIndex = 0;
+      render();
+    });
+
+    document.getElementById('vmc-btn-carousel')?.addEventListener('click', () => {
+      viewMode = 'carousel';
+      render();
+    });
+
+    document.getElementById('vmc-btn-grid')?.addEventListener('click', () => {
+      viewMode = 'grid';
+      render();
+    });
+
+    document.getElementById('vmc-prev-btn')?.addEventListener('click', () => {
+      currentIndex = currentIndex <= 0 ? maxIdx : Math.max(0, currentIndex - 1);
+      render();
+    });
+
+    document.getElementById('vmc-next-btn')?.addEventListener('click', () => {
+      currentIndex = currentIndex >= maxIdx ? 0 : Math.min(currentIndex + 1, maxIdx);
+      render();
+    });
+
+    // Read More Buttons
+    container.querySelectorAll('.btn-read-vmc').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const leader = stories.find((s) => s.directorId === id);
+        if (leader) openModal(leader);
+      });
+    });
+
+    // Reapply 3D parallax tilt to cards
+    setup3DParallaxTilt();
+  }
+
+  function openModal(leader) {
+    let modal = document.getElementById('vmc-story-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'vmc-story-modal';
+      modal.className = 'modal-overlay-custom';
+      modal.innerHTML = `
+        <div class="modal-box" style="max-width: 620px; padding: 30px; width: 100%; border-radius: 20px;">
+          <div class="modal-close-cross" id="close-vmc-modal">✕</div>
+          <div id="vmc-modal-content"></div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.id === 'close-vmc-modal') {
+          modal.classList.remove('active');
+        }
+      });
+    }
+
+    const contentBox = document.getElementById('vmc-modal-content');
+    if (contentBox) {
+      contentBox.innerHTML = `
+        <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 18px; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px;">
+          <img 
+            src="${leader.photoUrl}" 
+            alt="${leader.name}" 
+            style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 3px solid #f59e0b;"
+            onerror="this.src='/images/logo.png'"
+          >
+          <div>
+            <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: #0f172a; margin-bottom: 4px;">
+              ${leader.name}
+            </h3>
+            <div style="display: flex; gap: 8px;">
+              <span style="font-size: 0.75rem; background: #eff6ff; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-weight: 700; border: 1px solid #bfdbfe;">
+                Distributor ID: ${leader.directorId}
+              </span>
+              <span style="font-size: 0.75rem; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                👑 VMC Achiever
+              </span>
+            </div>
+          </div>
+        </div>
+        <div style="max-height: 280px; overflow-y: auto; padding-right: 8px; font-size: 0.92rem; color: #334155; line-height: 1.7; font-style: italic; border-left: 3px solid #f59e0b; padding-left: 14px; background: #f8fafc; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+          "${leader.message}"
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #94a3b8;">
+          <span>Wish You Wellth™ • Vestige Marketing</span>
+          <button type="button" class="btn-form-submit" onclick="document.getElementById('vmc-story-modal').classList.remove('active');" style="padding: 8px 20px;">
+            Close Story
+          </button>
+        </div>
+      `;
+    }
+
+    modal.classList.add('active');
+  }
+
+  render();
+}
+
+// ============================================================================
+// 13. Application Bootstrap
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   initAntiGravityCanvas();
@@ -826,8 +1076,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setupGrievanceForm();
   setupVictorAssistant();
   setupAwardsCarousel();
+  setupVMCSuccessStories();
   setupScrollToTop();
 
-  console.log('global.myvestige.com 1:1 clone initialized successfully with Anti-Gravity UI.');
+  console.log('global.myvestige.com 1:1 clone initialized successfully with Anti-Gravity UI & 47 VMC Members.');
 });
 
